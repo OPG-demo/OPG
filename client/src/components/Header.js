@@ -32,7 +32,11 @@ const Header = () => {
 						<p className='caption'>My Profile</p>
 					</div>
 				</div>
-			</div>
+      </div>
+      <div className='sub-header'>
+        <h1 className='title'>Personal Dashboard</h1>
+        <hr className='divider'></hr>
+      </div>
 		</div>
 	);
 };
