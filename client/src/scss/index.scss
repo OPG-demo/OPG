@@ -1,0 +1,30 @@
+body{
+  display: grid;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 16px;
+  // text-align: center;
+  // padding-bottom: 60px;
+  height: calc(100% - 60px);
+
+}
+
+.header-container {
+  text-align: center;
+}
+
+.nav-container {
+
+}
+
+.footer-container {
+  position:absolute;
+  left:0;
+  bottom:0;
+  right:0;
+}
+
+.footer-text {
+  font-size: .6rem;
+  line-height: .75;
+  text-align: center;
+}
