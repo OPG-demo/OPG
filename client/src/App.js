@@ -14,7 +14,7 @@ function App() {
       <div className='routes'>
         <Route exact path='/' component={PersonalDashboard}/>
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }

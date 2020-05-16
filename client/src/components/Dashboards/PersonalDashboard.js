@@ -1,40 +1,128 @@
 import React from 'react'
-import '../../scss/personalDashboard.scss'
-import {PieChart} from 'react-minimal-pie-chart'
+import '../../scss/Dashboard.scss'
+import {Card} from 'semantic-ui-react'
+import {Chart} from 'react-google-charts'
+
 
 const PersonalDashboard = () =>{
+  const pieOptions = {
+    slices: [
+      {
+        color: '#77964C'
+      },
+      {
+        color: '#A32721'
+      },
+      {
+        color: '#7AA095'
+      }
+    ],
+    legend: {
+      display: 'none',
+      position: "bottom",
+      textStyle: {
+        color: "233238",
+      },
+      width: '90%',
+    },
+    chartArea: {
+      left: 0,
+      top: 0,
+      width: "98%",
+      height: "80%"
+    },
+    fontName: "Roboto",
+    is3D: true, 
+    tooltip: {trigger: 'selection'}
+  }
 
   return(
+    <div className='dashboards-container'>
     <div className='personal-dashboard-container'>
-      <div className='container'>
-        <h2>My Objectives</h2>
-        <hr/>
-        <div className='status'>
-        <PieChart
-          className='PieChart'
-          data={[
-            { title: 'One', value: 10, color: '#E38627' },
-            { title: 'Two', value: 15, color: '#C13C37' },
-            { title: 'Three', value: 20, color: '#6A2135' },
-          ]}
-          lineWidth={55}
-        />
-        </div>
+      <h2>Personal</h2>
+      <div className='cards-container'>
+        <Card className='dash-card'>
+          <Card.Header className='dash-card-header'>My Objectives</Card.Header>
+          <Card.Description className='dash-card-description'>
+            <Chart
+              className='chart'
+              width={'100%'}
+              height={'100%'}
+              chartType="PieChart"
+              data={[
+                ['Status', 'Percentage complete'],
+                ['Complete', 50],
+                ['Overdue', 20],
+                ['Pending', 30]
+              ]}
+              options={pieOptions}
+            />
+          </Card.Description>
+        </Card>
+
+        <Card className='dash-card'>
+          <Card.Header className='dash-card-header'>My Tactics</Card.Header>
+          <Card.Description className='dash-card-description'>
+            <Chart
+              className='chart'
+              width={'100%'}
+              height={'100%'}
+              chartType="PieChart"
+              data={[
+                ['Status', 'Percentage complete'],
+                ['Complete', 50],
+                ['Overdue', 20],
+                ['Pending', 30]
+              ]}
+              options={pieOptions}
+            />
+          </Card.Description>
+        </Card>
+
+        <Card className='dash-card'>
+          <Card.Header className='dash-card-header'>My Committee Objectives</Card.Header>
+          <Card.Description className='dash-card-description'>
+            <Chart
+              className='chart'
+              width={'100%'}
+              height={'100%'}
+              chartType="PieChart"
+              data={[
+                ['Status', 'Percentage complete'],
+                ['Complete', 5],
+                ['Overdue', 2],
+                ['Pending', 2]
+              ]}
+              options={pieOptions}
+            />
+          </Card.Description>
+        </Card>
       </div>
-      <div className='container'>
-        <h2>My Tactics</h2>
-        <hr/>
-        <div className='status'>
-          
-        </div>
+    </div>
+
+    <div className='company-dashboard-container'>
+      <h2>Company</h2>
+      <div className='cards-container'>
+        <Card className='dash-card'>
+          <Card.Header className='dash-card-header'>Operations</Card.Header>
+          <Card.Description className='dash-card-description'>
+            <Chart
+              className='chart'
+              width={'100%'}
+              height={'100%'}
+              chartType="PieChart"
+              data={[
+                ['Status', 'Percentage complete'],
+                ['Complete', 50],
+                ['Overdue', 20],
+                ['Pending', 30]
+              ]}
+              options={pieOptions}
+            />
+          </Card.Description>
+        </Card>
       </div>
-      <div className='container'>
-        <h2>My Committee Objectives</h2>
-        <hr/>
-        <div className='status'>
-          
-        </div>
-      </div>
+    </div>
     </div>
   )
 }

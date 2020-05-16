@@ -34,7 +34,7 @@ const Header = () => {
 				</div>
       </div>
       <div className='sub-header'>
-        <h1 className='title'>Personal Dashboard</h1>
+        <h1 className='title'>Dashboards</h1>
         <hr className='divider'></hr>
       </div>
 		</div>
