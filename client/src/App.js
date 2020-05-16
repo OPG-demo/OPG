@@ -1,9 +1,12 @@
 import React from 'react';
-import './App.css';
 import {Route} from 'react-router-dom'
 
 import Header from './components/Header'
 import PersonalDashboard from './components/Dashboards/PersonalDashboard'
+import './scss/index.scss';
+
+import Header from './components/Header'
+import Footer from './components/Footer';
 
 function App() {
   return (
@@ -12,6 +15,8 @@ function App() {
       <div className='routes'>
         <Route exact path='/' component={PersonalDashboard}/>
       </div>
+      <Header />
+      <Footer />
     </div>
   );
 }
