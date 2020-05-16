@@ -6,11 +6,11 @@ const Header = () =>{
   return(
     <div className='header-container'>
       <div className='nav-container'>
-        <NavLink>Dashboards</NavLink>
-        <NavLink>State of Company</NavLink>
-        <NavLink>Situation Analysis</NavLink>
-        <NavLink>Objectives</NavLink>
-        <NavLink>Reports</NavLink>
+        <NavLink to='/dashboards'>Dashboards</NavLink>
+        <NavLink to='/stateofcompany'>State of Company</NavLink>
+        <NavLink to='/swot'>Situation Analysis</NavLink>
+        <NavLink to='/objectives'>Objectives</NavLink>
+        <NavLink to='/reports'>Reports</NavLink>
       </div>
     </div>
   )
