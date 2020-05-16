@@ -1,15 +1,37 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
+import React from 'react'
+import { NavLink } from 'react-router-dom'
+import logo from '../images/rockymtn.jpg'
+
 const Header = () => {
 	return (
 		<div className='header-container'>
-			<img src='../../public/images/dims.jpg' alt='logo'></img>
 			<div className='nav-container'>
-				<NavLink to='/dashboards'>Dashboards</NavLink>
-				<NavLink to='/stateofcompany'>State of Company</NavLink>
-				<NavLink to='/swot'>Situation Analysis</NavLink>
-				<NavLink to='/objectives'>Objectives</NavLink>
-				<NavLink to='/reports'>Reports</NavLink>
+				<img src={logo} alt='logo'></img>
+				<NavLink to='/dashboards' className='nav-links'>
+					Dashboards
+				</NavLink>
+				<NavLink to='/stateofcompany' className='nav-links'>
+					State of Company
+				</NavLink>
+				<NavLink to='/swot' className='nav-links'>
+					Situation Analysis
+				</NavLink>
+				<NavLink to='/objectives' className='nav-links'>
+					Objectives
+				</NavLink>
+				<NavLink to='/reports' className='nav-links'>
+					Reports
+				</NavLink>
+				<div className='icon-container '>
+					<div>
+						<i className='fas fa-wrench right-align icon'></i>
+						<p className='caption'>Admin</p>
+					</div>
+					<div>
+						<i className='fas fa-user right-align icon'></i>
+						<p className='caption'>My Profile</p>
+					</div>
+				</div>
 			</div>
 		</div>
 	);
