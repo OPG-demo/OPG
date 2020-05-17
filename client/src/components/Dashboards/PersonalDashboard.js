@@ -18,16 +18,15 @@ const PersonalDashboard = () =>{
       }
     ],
     legend: {
-      display: 'none',
       position: "bottom",
       textStyle: {
         color: "233238",
       },
-      width: '90%',
+      width: '100%'
     },
     chartArea: {
       width: "100%",
-      height: "80%"
+      height: "85%"
     },
     fontName: "Roboto",
     is3D: true, 
@@ -40,7 +39,7 @@ const PersonalDashboard = () =>{
     isStacked: true,
     vAxis: {minValue: 0, title: 'Number of Objectives'},
     hAxis: {title: 'Department'},
-    tooltip: {trigger: 'selection'}
+    tooltip: {trigger: 'selection'},
 
   }
 
@@ -53,8 +52,8 @@ const PersonalDashboard = () =>{
           <Card.Header className='dash-card-header'>Objectives</Card.Header>
           <Card.Description className='dash-card-description'>
             <Chart
-              width={'20rem'}
-              height={'20rem'}
+              width={'35rem'}
+              height={'25rem'}
               className='chart'
               chartType="PieChart"
               data={[
@@ -72,8 +71,8 @@ const PersonalDashboard = () =>{
           <Card.Header className='dash-card-header'>Tactics</Card.Header>
           <Card.Description className='dash-card-description'>
             <Chart
-            width={'20rem'}
-            height={'20rem'}
+              width={'32rem'}
+              height={'25rem'}
               className='chart'
               chartType="PieChart"
               data={[
@@ -91,8 +90,8 @@ const PersonalDashboard = () =>{
           <Card.Header className='dash-card-header'>Committee Objectives</Card.Header>
           <Card.Description className='dash-card-description'>
             <Chart
-              width={'20rem'}
-              height={'20rem'}
+              width={'32rem'}
+              height={'25rem'}
               className='chart'
               chartType="PieChart"
               data={[
@@ -115,6 +114,7 @@ const PersonalDashboard = () =>{
           <Card.Header className='dash-card-header'>Company Totals</Card.Header>
           <Card.Description className='dash-card-description'>
             <Chart
+            className='chart'
               width={'80rem'}
               height={'30rem'}
               chartType="ColumnChart"
