@@ -26,10 +26,8 @@ const PersonalDashboard = () =>{
       width: '90%',
     },
     chartArea: {
-      left: 0,
-      top: 0,
       width: "100%",
-      height: "90%"
+      height: "80%"
     },
     fontName: "Roboto",
     is3D: true, 
@@ -55,6 +53,8 @@ const PersonalDashboard = () =>{
           <Card.Header className='dash-card-header'>Objectives</Card.Header>
           <Card.Description className='dash-card-description'>
             <Chart
+              width={'20rem'}
+              height={'20rem'}
               className='chart'
               chartType="PieChart"
               data={[
@@ -72,6 +72,8 @@ const PersonalDashboard = () =>{
           <Card.Header className='dash-card-header'>Tactics</Card.Header>
           <Card.Description className='dash-card-description'>
             <Chart
+            width={'20rem'}
+            height={'20rem'}
               className='chart'
               chartType="PieChart"
               data={[
@@ -89,6 +91,8 @@ const PersonalDashboard = () =>{
           <Card.Header className='dash-card-header'>Committee Objectives</Card.Header>
           <Card.Description className='dash-card-description'>
             <Chart
+              width={'20rem'}
+              height={'20rem'}
               className='chart'
               chartType="PieChart"
               data={[
