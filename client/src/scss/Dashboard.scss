@@ -7,7 +7,7 @@
   width: 100%;
   margin: auto;
   box-sizing: border-box;
-  color: $color2;
+  color: $color4;
   font-family: 'Roboto';
 
 .personal-dashboard-container{
@@ -32,24 +32,23 @@
 
     .dash-card{
       width: 30%;
-      margin: 1rem;
       border-radius: 5px;
   
       .dash-card-header{
         text-align: center;
         padding: 1rem;
-        font-size: 1rem;
+        font-size: 1.5rem;
         font-weight: bold;
       }
   
       .dash-card-description{
-        width: 95%;
-        margin: auto;
         display: flex;
         justify-content: center;
         .chart{
+          width: 80rem;
           text{
-            font-size: .8rem;
+            font-size: 1rem;
+            font-weight: bold;
           }  
         }
       }
@@ -88,7 +87,7 @@
         display: flex;
         justify-content: center;
         padding: 1rem;
-        font-size: 2rem;
+        font-size: 1.5rem;
         font-weight: bold;
       }
   
@@ -98,6 +97,7 @@
         .chart{
           text{
             font-size: .8rem;
+            font-weight: bold;
           }
         }
       }
