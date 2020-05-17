@@ -23,7 +23,7 @@ const PersonalDashboard = () =>{
       textStyle: {
         color: "233238",
       },
-      width: '90%',
+      width: '100%'
     },
     chartArea: {
       width: "100%",
