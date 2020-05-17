@@ -26,14 +26,22 @@ const PersonalDashboard = () =>{
       width: '90%',
     },
     chartArea: {
-      left: 0,
-      top: 0,
-      width: "98%",
+      width: "100%",
       height: "80%"
     },
     fontName: "Roboto",
     is3D: true, 
     tooltip: {trigger: 'selection'}
+  }
+
+  const barOptions = {
+    colors: ['#77964C','#A32721','#7AA095'],
+    legend: {position: 'top'},
+    isStacked: true,
+    vAxis: {minValue: 0, title: 'Number of Objectives'},
+    hAxis: {title: 'Department'},
+    tooltip: {trigger: 'selection'}
+
   }
 
   return(
@@ -42,12 +50,12 @@ const PersonalDashboard = () =>{
       <h2>Personal</h2>
       <div className='cards-container'>
         <Card className='dash-card'>
-          <Card.Header className='dash-card-header'>My Objectives</Card.Header>
+          <Card.Header className='dash-card-header'>Objectives</Card.Header>
           <Card.Description className='dash-card-description'>
             <Chart
+              width={'20rem'}
+              height={'20rem'}
               className='chart'
-              width={'100%'}
-              height={'100%'}
               chartType="PieChart"
               data={[
                 ['Status', 'Percentage complete'],
@@ -61,12 +69,12 @@ const PersonalDashboard = () =>{
         </Card>
 
         <Card className='dash-card'>
-          <Card.Header className='dash-card-header'>My Tactics</Card.Header>
+          <Card.Header className='dash-card-header'>Tactics</Card.Header>
           <Card.Description className='dash-card-description'>
             <Chart
+            width={'20rem'}
+            height={'20rem'}
               className='chart'
-              width={'100%'}
-              height={'100%'}
               chartType="PieChart"
               data={[
                 ['Status', 'Percentage complete'],
@@ -80,12 +88,12 @@ const PersonalDashboard = () =>{
         </Card>
 
         <Card className='dash-card'>
-          <Card.Header className='dash-card-header'>My Committee Objectives</Card.Header>
+          <Card.Header className='dash-card-header'>Committee Objectives</Card.Header>
           <Card.Description className='dash-card-description'>
             <Chart
+              width={'20rem'}
+              height={'20rem'}
               className='chart'
-              width={'100%'}
-              height={'100%'}
               chartType="PieChart"
               data={[
                 ['Status', 'Percentage complete'],
@@ -104,20 +112,21 @@ const PersonalDashboard = () =>{
       <h2>Company</h2>
       <div className='cards-container'>
         <Card className='dash-card'>
-          <Card.Header className='dash-card-header'>Operations</Card.Header>
+          <Card.Header className='dash-card-header'>Company Totals</Card.Header>
           <Card.Description className='dash-card-description'>
             <Chart
-              className='chart'
-              width={'100%'}
-              height={'100%'}
-              chartType="PieChart"
+              width={'80rem'}
+              height={'30rem'}
+              chartType="ColumnChart"
               data={[
-                ['Status', 'Percentage complete'],
-                ['Complete', 50],
-                ['Overdue', 20],
-                ['Pending', 30]
+                ['Department', 'Complete', 'Overdue', 'Pending'],
+                ['Operations', 1, 4, 2],
+                ['Marketing', 2, 2, 3],
+                ['Finance and Administration', 5, 1, 3],
+                ['OPG', 3, 4, 1],
+                ['Executive', 3, 2, 4],
               ]}
-              options={pieOptions}
+              options={barOptions}
             />
           </Card.Description>
         </Card>
