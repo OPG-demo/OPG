@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import './palette.scss';
+
+.state-container{
+  width: 95%;
+  margin: auto;
+
+  .missionStatement{
+    margin: 2rem;
+    h2{
+      border-bottom: 2px solid $color4;
+    }
+    p{
+      text-align: center;
+      margin: 1rem;
+    }
+  }
+  .successFactors{
+    margin: 2rem;
+    display: flex;
+    flex-direction: column;
+    h2{
+      border-bottom: 2px solid $color4;
+      text-align: right;
+    }
+    .success-container{
+      align-self: center;
+
+      .table{
+        padding: 0 1rem 0 1rem;
+        border-spacing: 0;
+
+        .cell{
+          padding: 1rem 2rem 1rem 2rem;
+          text-align: center;
+          border-bottom: 2px solid $color1;
+        }
+      }
+    }
+  }
+  .coreCompetencies{
+    margin: 2rem;
+    display: flex;
+    flex-direction: column;
+
+    h2{
+      border-bottom: 2px solid $color4;
+    }
+    .competency-container{
+      align-self: center;
+
+      .table{
+        padding: 0 1rem 0 1rem;
+        border-spacing: 0;
+
+        .cell{
+          padding: 1rem 2rem 1rem 2rem;
+          text-align: center;
+          border-bottom: 2px solid $color1;
+        }
+      }
+    }
+  }
+  .externalEnvironment{
+    margin: 2rem;
+    display: flex;
+    flex-direction: column;
+    h2{
+      border-bottom: 2px solid $color4;
+      text-align: right;
+    }
+
+    .environments-container{
+      display: flex;
+      justify-content: center;
+      width: 50%;
+      margin: auto;
+
+      .card{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 1rem;
+
+        .header{
+          font-size: 1rem;
+          font-weight: bold;
+        }
+      }
+    }
+  }
+  .organizationChart{
+    margin: 2rem;
+    h2{
+      border-bottom: 2px solid $color4;
+    }
+
+    .organization-container{
+      width: 90%;
+      margin: auto;
+    }
+  }
+  .executiveSummary{
+    margin: 2rem;
+    h2{
+      border-bottom: 2px solid $color4;
+      text-align: right;
+    }
+
+    p{
+      text-align: center;
+      margin: 1rem;
+    }
+  }
+}
