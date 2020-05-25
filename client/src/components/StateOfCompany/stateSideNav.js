@@ -48,7 +48,7 @@ const SideNav = () =>{
           offset={-70}
           duration={500}
         >
-          External Environment Review
+          External Environment
         </Link>
       </li>
       <li className='nav-item'>

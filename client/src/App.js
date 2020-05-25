@@ -7,6 +7,7 @@ import './scss/index.scss';
 import Header from './components/Header'
 import Footer from './components/Footer';
 import StateOfCompany from './components/stateOfCompany/StateOfCompany';
+import SituationAnalysis from './components/SWOT/SituationAnalysis';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route exact path='/' component={Dashboard}/>
         <Route exact path='/dashboards' component={Dashboard}/>
         <Route exact path='/stateofcompany' component={StateOfCompany}/>
+        <Route exact path='/swot' component={SituationAnalysis}/>
       </div>
       {/* <Footer /> */}
     </div>

@@ -4,7 +4,7 @@ import SuccessFactorTable from './successFactorTable'
 import CoreCompetencyTable from './coreCompetencyTable'
 import ExternalEnvironmentTable from './externalEnvironmentTable'
 import OrganizationalChart from './organizationChart'
-import SideNav  from './sideNav'
+import SideNav  from './stateSideNav'
 
 import {Link, Element, animateScroll as scroll} from 'react-scroll'
 
