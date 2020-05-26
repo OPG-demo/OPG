@@ -1,13 +1,14 @@
 import React from 'react'
 import {Link, animateScroll as scroll} from 'react-scroll'
+import {List} from 'semantic-ui-react'
 import '../../scss/SituationAnalysis.scss'
 
 
 const swotSideNav = () =>{
   return(
     <div className='sidenav-container'>
-    <ul className='nav'>
-      <li className='nav-item'>
+    <List link className='nav'>
+      <List.Item className='nav-item'>
         <Link
           to='strengths'
           spy={true}
@@ -17,8 +18,8 @@ const swotSideNav = () =>{
         >
           Strengths
         </Link>
-      </li>
-      <li className='nav-item'>
+      </List.Item>
+      <List.Item className='nav-item'>
         <Link
           to='weaknesses'
           spy={true}
@@ -28,8 +29,8 @@ const swotSideNav = () =>{
         >
           Weaknesses
         </Link>
-      </li>
-      <li className='nav-item'>
+      </List.Item>
+      <List.Item className='nav-item'>
         <Link
           to='opportunities'
           spy={true}
@@ -39,8 +40,8 @@ const swotSideNav = () =>{
         >
           Opportunities
         </Link>
-      </li>
-      <li className='nav-item'>
+      </List.Item>
+      <List.Item className='nav-item'>
         <Link
           to='threats'
           spy={true}
@@ -50,8 +51,8 @@ const swotSideNav = () =>{
         >
           Threats
         </Link>
-      </li>
-    </ul>
+      </List.Item>
+    </List>
   </div>
   )
 }

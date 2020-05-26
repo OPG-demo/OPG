@@ -1,13 +1,14 @@
 import React from 'react'
 import {Link, animateScroll as scroll} from 'react-scroll'
+import {List} from 'semantic-ui-react'
 import '../../scss/StateOfCompany.scss'
 
 
 const SideNav = () =>{
   return(
     <div className='sidenav-container'>
-    <ul className='nav'>
-      <li className='nav-item'>
+    <List link className='nav'>
+      <List.Item className='nav-item'>
         <Link
           to='missionStatement'
           spy={true}
@@ -17,8 +18,8 @@ const SideNav = () =>{
         >
           Mission Statement
         </Link>
-      </li>
-      <li className='nav-item'>
+      </List.Item>
+      <List.Item className='nav-item'>
         <Link
           to='successFactors'
           spy={true}
@@ -28,8 +29,8 @@ const SideNav = () =>{
         >
           Success Factors
         </Link>
-      </li>
-      <li className='nav-item'>
+      </List.Item>
+      <List.Item className='nav-item'>
         <Link
           to='coreCompetencies'
           spy={true}
@@ -39,8 +40,8 @@ const SideNav = () =>{
         >
           Core Competencies
         </Link>
-      </li>
-      <li className='nav-item'>
+      </List.Item>
+      <List.Item className='nav-item'>
         <Link
           to='externalEnvironment'
           spy={true}
@@ -50,8 +51,8 @@ const SideNav = () =>{
         >
           External Environment
         </Link>
-      </li>
-      <li className='nav-item'>
+      </List.Item>
+      <List.Item className='nav-item'>
         <Link
           to='organizationChart'
           spy={true}
@@ -61,8 +62,8 @@ const SideNav = () =>{
         >
           Organization Chart
         </Link>
-      </li>
-      <li className='nav-item'>
+      </List.Item>
+      <List.Item className='nav-item'>
         <Link
           to='executiveSummary'
           spy={true}
@@ -72,8 +73,8 @@ const SideNav = () =>{
         >
           Executive Summary
         </Link>
-      </li>
-    </ul>
+      </List.Item>
+    </List>
   </div>
   )
 }

@@ -30,10 +30,6 @@
     left: 0;
     top: 20%;
 
-    ul{
-      list-style-type: none;
-    }
-
     .nav-item{
       padding: .5rem;
       color: $color4;
@@ -52,14 +48,18 @@
     position: relative;
     margin-right: 3rem;
 
-  .strength-container{
-    margin: 2rem;
-    h2{
-      border-bottom: 2px solid $color4;
+    .strength-container{
+      margin: 2rem;
+      display: flex;
+      flex-direction: column;
+      h2{
+        border-bottom: 2px solid $color4;
+      }
     }
-  }
   .weakness-container{
     margin: 2rem;
+    display: flex;
+    flex-direction: column;
     h2{
       border-bottom: 2px solid $color4;
       text-align: right;
@@ -67,36 +67,40 @@
   }
   .opportunity-container{
     margin: 2rem;
+    display: flex;
+    flex-direction: column;
     h2{
       border-bottom: 2px solid $color4;
     }
   }
   .threat-container{
     margin: 2rem;
+    display: flex;
+    flex-direction: column;
     h2{
       border-bottom: 2px solid $color4;
       text-align: right;
     }
   }
 
-  .card-container{
-    display: flex;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
+  .table-container{
+    align-self: center;
 
-    .card{
-      border: 2px solid $color4;
-      border-radius: 3px;
-      padding: 2rem;
-      margin: 1rem;
+    .table{
+      padding: 0 1rem 0 1rem;
+      border-spacing: 0;
 
-      .card-title{
-        font-size: 1rem;
-        font-weight: bold;
-        margin-bottom: 1rem;
-
+      .headercell{
+        border-bottom: 2px solid $color1;
+        padding: 1rem 2rem 1rem 2rem;
+        text-align: center;
       }
 
+      .cell{
+        padding: 1rem 2rem 1rem 2rem;
+        text-align: center;
+        // border-bottom: 2px solid $color1;
+      }
     }
   }
 }
