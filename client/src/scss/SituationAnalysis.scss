@@ -85,20 +85,22 @@
 
   .table-container{
     align-self: center;
+    width: 90%;
 
     .table{
       padding: 0 1rem 0 1rem;
       border-spacing: 0;
+      width: 100%;
 
       .headercell{
         border-bottom: 2px solid $color1;
         padding: 1rem 2rem 1rem 2rem;
         text-align: center;
+        font-size: 1rem;
       }
 
       .cell{
-        padding: 1rem 2rem 1rem 2rem;
-        text-align: center;
+        padding: .5rem 1rem .5rem 1rem;        text-align: center;
         // border-bottom: 2px solid $color1;
       }
     }
