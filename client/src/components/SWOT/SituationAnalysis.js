@@ -5,7 +5,7 @@ import OpportunityCard from './OpportunityTable'
 import ThreatCard from './ThreatTable'
 import SideNav from './swotSideNav'
 import '../../scss/SituationAnalysis.scss'
-
+import DraggableTable from './DraggableTable'
 import {Element, animateScroll as scroll} from 'react-scroll'
 
 const SituationAnalysis = () =>{
@@ -25,6 +25,7 @@ const SituationAnalysis = () =>{
             <div className='strength-container'>
               <h2>Strengths</h2>
                 <StrengthTable/>
+                {/* <DraggableTable/> */}
             </div>
           </section>
         </Element>

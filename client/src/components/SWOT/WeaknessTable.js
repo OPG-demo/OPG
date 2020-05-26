@@ -1,16 +1,24 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {Table} from 'semantic-ui-react'
 import '../../scss/SituationAnalysis.scss'
+import DraggableTableRow from './DraggableTableRow'
 
 
 const WeaknessTable = () =>{
 
-  const weaknessData= [
+  const [data, setData] = useState([      
     {title: 'Test weakness', priority: '1', division: 'Executive'},
-    {title: 'Test weakness2', priority: '2', division: 'Marketing'},
-    {title: 'Test weakness3', priority: '3', division: 'Executive'},
-    {title: 'Test weakness4', priority: '4', division: 'Operations'},
-  ]
+    {title: 'Test weakness 2', priority: '2', division: 'Marketing'},
+    {title: 'Test weakness 3', priority: '3', division: 'Executive'},
+    {title: 'Test weakness 4', priority: '4', division: 'Operations'}
+])
+
+const swap =(a, b) => {
+  let newData = data
+  newData[a] = newData.splice(b, 1, newData[a])[0];
+  setData([...data]);
+}
+
   return(
     <div className='table-container'>
       <Table className='table'>
@@ -22,13 +30,13 @@ const WeaknessTable = () =>{
           </Table.Row>
         </Table.Header>
         <Table.Body>
-        {weaknessData.map(weakness =>{
-          return <Table.Row key={weakness.title}>
-            <Table.Cell className='cell'>{weakness.priority}</Table.Cell>
+        {data.map((weakness, index) =>
+          <DraggableTableRow key={index} i={index} action={swap}>
+            <Table.Cell className='cell'>{index + 1}</Table.Cell>
             <Table.Cell className='cell'>{weakness.title}</Table.Cell>
             <Table.Cell className='cell'>{weakness.division}</Table.Cell>
-        </Table.Row>
-        })}
+          </DraggableTableRow>
+        )}
         </Table.Body>
       </Table>
     </div>
