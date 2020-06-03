@@ -1,17 +1,27 @@
-import React from 'react'
+import React, {useState} from 'react'
 import StrengthTable from './StrengthTable'
 import WeaknessCard from './WeaknessTable'
 import OpportunityCard from './OpportunityTable'
 import ThreatCard from './ThreatTable'
 import SideNav from './swotSideNav'
 import '../../scss/SituationAnalysis.scss'
-import DraggableTable from './DraggableTable'
 import {Element, animateScroll as scroll} from 'react-scroll'
+import Example from './dndverticallist'
+import {Accordion, Icon} from 'semantic-ui-react'
 
 const SituationAnalysis = () =>{
+  let [isActive, setIsActive] = useState(0)
+
+  const handleClick = (e, titleProps) =>{
+    const {index} = titleProps
+    const newIndex = isActive === index ? -1 : index
+    setIsActive(newIndex)
+  }
+
   const scrollToTop = () =>{
     scroll.scrollToTop()
   }
+
 
   return(
     <div className='swot-container'>
@@ -24,8 +34,25 @@ const SituationAnalysis = () =>{
           <section className='top'>
             <div className='strength-container'>
               <h2>Strengths</h2>
-                <StrengthTable/>
-                {/* <DraggableTable/> */}
+                {/* <StrengthTable/> */}
+                <Accordion>
+                <div className='container'>
+
+                  <Accordion.Title
+                    onClick={handleClick}
+                    active={isActive === 0}
+                    index={0}
+                  >
+                    View Items
+                    <i class="fas fa-chevron-circle-down"></i>
+                    <i class="fas fa-chevron-circle-up"></i>
+
+                  </Accordion.Title>
+                  <Accordion.Content active={isActive === 0}>
+                    <Example/>
+                  </Accordion.Content>
+                  </div>
+                </Accordion>
             </div>
           </section>
         </Element>

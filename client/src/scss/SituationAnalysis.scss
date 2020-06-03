@@ -55,7 +55,43 @@
       h2{
         border-bottom: 2px solid $color4;
       }
-    }
+
+      .container{
+        display: flex;
+        flex-direction: column;
+      }
+
+      .title{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-transform: none;
+
+        .fa-chevron-circle-down{
+          display: none;
+        }
+        .fa-chevron-circle-up{
+          display: inline;
+        }
+      }
+      .title.active{
+        .fa-chevron-circle-up{
+          display: none;
+        }
+        .fa-chevron-circle-down{
+          display: inline;
+        }
+      }
+      .content{
+        display: none;
+      }
+      .content.active{
+        display: block;
+      }
+
+  }
+
   .weakness-container{
     margin: 2rem;
     display: flex;
