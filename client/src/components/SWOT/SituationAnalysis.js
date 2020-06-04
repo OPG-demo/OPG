@@ -2,22 +2,15 @@ import React, {useState} from 'react'
 import StrengthTable from './StrengthTable'
 import WeaknessCard from './WeaknessTable'
 import OpportunityCard from './OpportunityTable'
-import ThreatCard from './ThreatTable'
+import ThreatTable from './ThreatTable'
 import SideNav from './swotSideNav'
 import '../../scss/SituationAnalysis.scss'
 import {Element, animateScroll as scroll} from 'react-scroll'
-import Example from './dndverticallist'
-import {Accordion, Icon} from 'semantic-ui-react'
+import {Accordion, AccordionItem, AccordionItemHeading, AccordionItemButton, AccordionItemPanel} from 'react-accessible-accordion'
+
 
 const SituationAnalysis = () =>{
-  let [isActive, setIsActive] = useState(0)
-
-  const handleClick = (e, titleProps) =>{
-    const {index} = titleProps
-    const newIndex = isActive === index ? -1 : index
-    setIsActive(newIndex)
-  }
-
+  
   const scrollToTop = () =>{
     scroll.scrollToTop()
   }
@@ -30,54 +23,81 @@ const SituationAnalysis = () =>{
       </div>
 
       <div className='elements'>
-        <Element name='strengths'>
-          <section className='top'>
-            <div className='strength-container'>
-              <h2>Strengths</h2>
-                {/* <StrengthTable/> */}
-                <Accordion>
-                <div className='container'>
-
-                  <Accordion.Title
-                    onClick={handleClick}
-                    active={isActive === 0}
-                    index={0}
-                  >
-                    View Items
-                    <i class="fas fa-chevron-circle-down"></i>
-                    <i class="fas fa-chevron-circle-up"></i>
-
-                  </Accordion.Title>
-                  <Accordion.Content active={isActive === 0}>
-                    <Example/>
-                  </Accordion.Content>
+        <Accordion allowMultipleExpanded={true} allowZeroExpanded={true}>
+          <AccordionItem>
+            <Element name='strengths'>
+              <section className='top'>
+                <div className='strength-container'>
+                  <h2>Strengths</h2>
+                  <div className='container'>
+                    <AccordionItemHeading>
+                      <AccordionItemButton>
+                        <i class="fas fa-align-justify"></i>
+                      </AccordionItemButton>
+                    </AccordionItemHeading>
+                    <AccordionItemPanel>
+                      <StrengthTable/>
+                    </AccordionItemPanel>
                   </div>
-                </Accordion>
-            </div>
-          </section>
-        </Element>
+                </div>
+              </section>
+            </Element>
+          </AccordionItem>
 
-        <Element name='weaknesses'>
-          <div className='weakness-container'>
-            <h2>Weaknesses</h2>
-              <WeaknessCard/>
-          </div>
-        </Element>
+          <AccordionItem>
+            <Element name='weaknesses'>
+              <div className='weakness-container'>
+                <h2>Weaknesses</h2>
+                <div className='container'>
+                  <AccordionItemHeading>
+                    <AccordionItemButton>
+                      <i class="fas fa-align-justify"></i>
+                    </AccordionItemButton>
+                  </AccordionItemHeading>
+                  <AccordionItemPanel>
+                    <WeaknessCard/>
+                  </AccordionItemPanel>
+                </div>
+              </div>
+            </Element>
+          </AccordionItem>
 
-        <Element name='opportunities'>
-          <div className='opportunity-container'>
-            <h2>Opportunities</h2>
-              <OpportunityCard/>
-          </div>
-        </Element>
+          <AccordionItem>
+            <Element name='opportunities'>
+              <div className='opportunity-container'>
+                <h2>Opportunities</h2>
+                <div className='container'>
+                  <AccordionItemHeading>
+                    <AccordionItemButton>
+                      <i class="fas fa-align-justify"></i>
+                    </AccordionItemButton>
+                  </AccordionItemHeading>
+                  <AccordionItemPanel>
+                    <OpportunityCard/>
+                  </AccordionItemPanel>
+                </div>
+              </div>
+            </Element>
+          </AccordionItem>
 
-        <Element name='threats'>
-          <div className='threat-container'>
-            <h2>Threats</h2>
-              <ThreatCard/>
-          </div>
-        </Element>
-
+          <AccordionItem>
+            <Element name='threats'>
+              <div className='threat-container'>
+                <h2>Threats</h2>
+                <div className='container'>
+                  <AccordionItemHeading>
+                    <AccordionItemButton>
+                      <i class="fas fa-align-justify"></i>
+                    </AccordionItemButton>
+                  </AccordionItemHeading>
+                  <AccordionItemPanel>
+                    <ThreatTable/>
+                  </AccordionItemPanel>
+                </div>
+              </div>
+            </Element>
+          </AccordionItem>
+        </Accordion>
       </div>
       <div className='arrow'>
         <i class="fas fa-arrow-up" onClick={scrollToTop}></i>

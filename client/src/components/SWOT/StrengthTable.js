@@ -1,8 +1,16 @@
 import React, {useState} from 'react'
-import {Table} from 'semantic-ui-react'
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import '../../scss/SituationAnalysis.scss'
-import DraggableTableRow from './DraggableTableRow'
 
+
+
+const reorder = (list, startIndex, endIndex) => {
+  const result = Array.from(list);
+  const [removed] = result.splice(startIndex, 1);
+  result.splice(endIndex, 0, removed);
+
+  return result;
+};
 
 const StrengthTable = () =>{
 
@@ -13,32 +21,49 @@ const StrengthTable = () =>{
     {title: 'Test strength 4', priority: '4', division: 'Operations'}
 ])
 
-const swap =(a, b) => {
-  let newData = data
-  newData[a] = newData.splice(b, 1, newData[a])[0];
-  setData([...data]);
+const onDragEnd = (result) => {
+  // dropped outside the list
+  if (!result.destination) {
+    return;
+  }
+
+  const items = reorder(
+    data,
+    result.source.index,
+    result.destination.index
+  );
+
+  setData(items)
 }
 
   return(
-    <div className='table-container'>
-      <Table className='table'>
-        <Table.Header className='header'>
-          <Table.Row className='row'>
-            <Table.HeaderCell className='headercell' singleLine>Priority</Table.HeaderCell>
-            <Table.HeaderCell className='headercell' singleLine>Title</Table.HeaderCell>
-            <Table.HeaderCell className='headercell' singleLine>Division</Table.HeaderCell>
-          </Table.Row>
-        </Table.Header>
-        <Table.Body>
-        {data.map((strength, index) =>
-          <DraggableTableRow key={strength.title} i={index} action={swap}>
-            <Table.Cell className='cell'>{index + 1}</Table.Cell>
-            <Table.Cell className='cell'>{strength.title}</Table.Cell>
-            <Table.Cell className='cell'>{strength.division}</Table.Cell>
-          </DraggableTableRow>
+    <div className='dnd-container'>
+    <div className='list-header'><p>Priority</p><p>Title</p><p>Division</p></div>
+    <DragDropContext onDragEnd={onDragEnd}>
+      <Droppable droppableId="droppable">
+        {(provided) => (
+          <div
+            {...provided.droppableProps}
+            ref={provided.innerRef}
+          >
+            {data.map((item, index) => (
+              <Draggable key={item.title} draggableId={item.title} index={index}>
+                {(provided) => (
+                  <div
+                    ref={provided.innerRef}
+                    {...provided.draggableProps}
+                    {...provided.dragHandleProps}
+                  >
+                  <div className='list-item'> <p>priority {index + 1}</p> <p>{item.title}</p><p>{item.division}</p></div>
+                  </div>
+                )}
+              </Draggable>
+            ))}
+            {provided.placeholder}
+          </div>
         )}
-        </Table.Body>
-      </Table>
+      </Droppable>
+    </DragDropContext>
     </div>
   )
 }
