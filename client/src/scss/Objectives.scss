@@ -26,7 +26,17 @@
     justify-content: flex-start;
     align-items: center;
     // border: 2px solid blue;
-    margin-left: -2rem;
+    cursor: pointer;
+  }
+
+  .accordion-button::before{
+    content: url('caret-right-solid.svg');
+    width: .5rem;
+    margin-right: -.5rem;
+  }
+
+  .accordion-button[aria-expanded='true']::before{
+    transform: rotate(45deg);
   }
 
   .accordion-heading{
@@ -46,6 +56,8 @@
 
       .desc{
         width: 150%;
+        display: flex;
+        flex-wrap: wrap;
       }
     }
   }

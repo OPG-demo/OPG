@@ -15,7 +15,7 @@ const Objectives = () =>{
 
   const [data, setData] = useState([      
     {description: 'Test threat', priority: '1', division: 'Executive', responsible: 'User1', due: '1/1/2020', update: '1/2/2020', completed: '1/3/2020', primaryswot: 'stuff'},
-    {description: 'Test threat 2', priority: '2', division: 'Marketing', responsible: 'User2', due: '1/1/2020', update: '1/2/2020', completed: '1/3/2020', primaryswot: 'stuff'},
+    {description: 'Test threat 2 testing the wrap', priority: '2', division: 'Marketing', responsible: 'User2', due: '1/1/2020', update: '1/2/2020', completed: '1/3/2020', primaryswot: 'stuff'},
     {description: 'Test threat 3', priority: '3', division: 'Executive', responsible: 'User1', due: '1/1/2020', update: '1/2/2020', completed: '1/3/2020', primaryswot: 'stuff'},
     {description: 'Test threat 4', priority: '4', division: 'Operations', responsible: 'User3', due: '1/1/2020', update: '1/2/2020', completed: '1/3/2020', primaryswot: 'stuff'}
 ])
@@ -46,7 +46,7 @@ return(
           ref={provided.innerRef}
         >
           {data.map((item, index) => (
-            <Draggable key={item.title} draggableId={item.title} index={index}>
+            <Draggable key={item.description} draggableId={item.description} index={index}>
               {(provided) => (
                 <div
                   ref={provided.innerRef}
@@ -56,7 +56,7 @@ return(
                 <AccordionItem>
                   <AccordionItemHeading>
                     <AccordionItemButton className='accordion-button'>
-                      click <div className='accordion-heading'><p>{index +1}</p><p className='desc'>{item.description}</p><p>{item.responsible}</p><p>{item.division}</p><p>{item.due}</p><p>{item.update}</p><p>{item.completed}</p><p>{item.primaryswot}</p></div>
+                     <div className='accordion-heading'><p>{index +1}</p><p className='desc'>{item.description}</p><p>{item.responsible}</p><p>{item.division}</p><p>{item.due}</p><p>{item.update}</p><p>{item.completed}</p><p>{item.primaryswot}</p></div>
                     </AccordionItemButton>
                   </AccordionItemHeading>
                   <AccordionItemPanel>
