@@ -1,15 +1,16 @@
 .dnd-container{
-  margin: auto;
-  width: 80%;
+  margin: 3% auto;
+  width: 90%;
   box-sizing: border-box;
   // border: 2px solid green;
 
   .list-header{
     display: flex;
     justify-content: space-evenly;
-    // border: 2px solid black;
+    border-bottom: 2px solid black;
+    margin-bottom: 1rem;
     width: 100%;
-    font-size: .9rem;
+    font-size: 1rem;
     font-weight: bold;
 
     p{
@@ -45,11 +46,11 @@
     width: 100%;
     // border: 2px solid red;
     text-align: center;
-    font-size: .7rem;
+    font-size: .9rem;
 
     p{
       // border: 2px solid pink;
-      margin: 1rem;
+      margin: .5rem;
       width: 100%;
       text-align: center;
       align-self: center;
