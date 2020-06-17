@@ -1,0 +1,70 @@
+.dnd-container{
+  margin: 3% auto;
+  width: 90%;
+  box-sizing: border-box;
+  // border: 2px solid green;
+
+  .list-header{
+    display: flex;
+    justify-content: space-evenly;
+    border-bottom: 2px solid black;
+    margin-bottom: 1rem;
+    width: 100%;
+    font-size: 1rem;
+    font-weight: bold;
+
+    p{
+      // border: 2px solid pink;
+      margin: .5rem;
+      width: 100%;
+      text-align: center;
+      align-self: center;
+    }
+  }
+
+  .accordion-button{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    // border: 2px solid blue;
+    cursor: pointer;
+  }
+
+  .accordion-button::before{
+    content: url('caret-right-solid.svg');
+    width: .5rem;
+    margin-right: -.5rem;
+  }
+
+  .accordion-button[aria-expanded='true']::before{
+    transform: rotate(45deg);
+  }
+
+  .accordion-heading{
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    // border: 2px solid red;
+    text-align: center;
+    font-size: .9rem;
+
+    p{
+      // border: 2px solid pink;
+      margin: .5rem;
+      width: 100%;
+      text-align: center;
+      align-self: center;
+
+      .desc{
+        width: 150%;
+        display: flex;
+        flex-wrap: wrap;
+      }
+    }
+  }
+
+  .accordion-panel{
+    display: flex;
+    justify-content: space-evenly;
+  }
+}
