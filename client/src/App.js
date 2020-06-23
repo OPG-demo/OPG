@@ -9,13 +9,16 @@ import Footer from './components/Footer';
 import StateOfCompany from './components/stateOfCompany/StateOfCompany';
 import SituationAnalysis from './components/SWOT/SituationAnalysis';
 import Objectives from './components/Objectives'
+import Login from './components/Login'
+import Register from './components/Register'
 
 function App() {
   return (
     <div className="App">
       <Header/>
       <div className='routes'>
-        <Route exact path='/' component={Dashboard}/>
+        <Route exact path='/' component={Login}/>
+        <Route exact path='/register' component={Register}/>
         <Route exact path='/dashboards' component={Dashboard}/>
         <Route exact path='/stateofcompany' component={StateOfCompany}/>
         <Route exact path='/swot' component={SituationAnalysis}/>
