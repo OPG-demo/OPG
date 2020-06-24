@@ -1,17 +1,24 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {Icon, Label, Menu, Table} from 'semantic-ui-react'
 
 import '../../scss/StateOfCompany.scss'
+import axios from 'axios'
 
 
-const tableData = [
-  {priority: 1, description: 'test', division: 'Executive', ccreference: null},
-  {priority: 4, description: 'test4', division: 'Marketing', ccreference: null},
-  {priority: 2, description: 'test2', division: 'Executive', ccreference: 1},
-  {priority: 3, description: 'test3', division: 'Operations', ccreference: null},
-]
-
-const SuccessFactorTable = () =>{
+const SuccessFactorTable = (props) =>{
+  const [success, setSuccess] = useState([])
+    
+  useEffect(() =>{
+    axios
+      .get(`http://localhost:8000/iksf`)
+      .then(res =>{
+        setSuccess(res.data)
+        console.log('success',res.data)
+      })
+      .catch(err =>{
+        console.log(err)
+      })
+  },[])
 
   return(
     <div className='success-container'>
@@ -25,12 +32,12 @@ const SuccessFactorTable = () =>{
           </Table.Row>
         </Table.Header>
         <Table.Body>
-          {tableData.map((item) =>
-          <Table.Row key={item.description}>
+          {success.map((item) =>
+          <Table.Row key={item.id}>
             <Table.Cell className='cell'>{item.priority}</Table.Cell>
             <Table.Cell className='cell'>{item.description}</Table.Cell>
-            <Table.Cell className='cell'>{item.division}</Table.Cell>
-            <Table.Cell className='cell'>{item.ccreference}</Table.Cell>
+            <Table.Cell className='cell'>{item.div_id}</Table.Cell>
+            <Table.Cell className='cell'>{item.corecomp}</Table.Cell>
           </Table.Row>
           )}
         </Table.Body>

@@ -1,5 +1,6 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {Icon, Label, Menu, Table} from 'semantic-ui-react'
+import axios from 'axios'
 
 import '../../scss/StateOfCompany.scss'
 
@@ -11,7 +12,20 @@ const tableData = [
   {priority: 4, description: 'test4', division: 'Operations', iksf: null, scope: 'Present'},
 ]
 
-const CoreCompetencyTable = () =>{
+const CoreCompetencyTable = (props) =>{
+  const [corecomp, setCorecomp] = useState([])
+
+  useEffect(() =>{
+    axios
+      .get(`http://localhost:8000/corecomp`)
+      .then(res =>{
+        setCorecomp(res.data)
+        console.log('corecomp'. res.data)
+      })
+      .catch(err =>{
+        console.log(err)
+      })
+  },[])
 
   return(
     <div className='competency-container'>
@@ -26,11 +40,11 @@ const CoreCompetencyTable = () =>{
           </Table.Row>
         </Table.Header>
         <Table.Body>
-          {tableData.map((item) =>
-          <Table.Row key={item.description}>
+          {corecomp.map((item) =>
+          <Table.Row key={item.id}>
             <Table.Cell className='cell'>{item.priority}</Table.Cell>
             <Table.Cell className='cell'>{item.description}</Table.Cell>
-            <Table.Cell className='cell'>{item.division}</Table.Cell>
+            <Table.Cell className='cell'>{item.div_id}</Table.Cell>
             <Table.Cell className='cell'>{item.iksf}</Table.Cell>
             <Table.Cell className='cell'>{item.scope}</Table.Cell>
           </Table.Row>

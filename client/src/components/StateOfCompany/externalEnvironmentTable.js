@@ -1,5 +1,6 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {Card} from 'semantic-ui-react'
+import axios from 'axios'
 
 import '../../scss/StateOfCompany.scss'
 
@@ -8,37 +9,22 @@ const tableData = ['stuff', 'things', 'stuff', 'things', 'stuff', 'things',]
   
 
 const ExternalEnvironmentTable = () =>{
+  const [externalReview, setExternalReview] = useState()
+
+  useEffect(() =>{
+    axios
+      .get(`http://localhost:8000/org/1`)
+      .then(res =>{
+        setExternalReview(res.data.eereview)
+      })
+      .catch(err =>{
+        console.log(err)
+      })
+  })
 
   return(
     <div className='environments-container'>
-      <div className='card'>
-        <Card>
-          <Card.Content>
-            <Card.Header className='header'>Possible Business Threats</Card.Header>
-            <Card.Description>
-              {tableData.map((item) =>
-              <ul>
-                <li>{item}</li>
-              </ul>
-              )}
-            </Card.Description>
-          </Card.Content>
-        </Card>
-      </div>
-      <div className='card'>
-        <Card>
-          <Card.Content>
-            <Card.Header className='header'>Market Shifts</Card.Header>
-            <Card.Description>
-              {tableData.map((item) =>
-              <ul>
-                <li>{item}</li>
-              </ul>
-              )}
-            </Card.Description>
-          </Card.Content>
-        </Card>
-      </div>
+      <p>{externalReview}</p>
     </div>
   )
 }
