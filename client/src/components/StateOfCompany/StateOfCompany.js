@@ -1,20 +1,21 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import {Icon, Label, Menu, Table} from 'semantic-ui-react'
 import SuccessFactorTable from './successFactorTable'
 import CoreCompetencyTable from './coreCompetencyTable'
 import ExternalEnvironmentTable from './externalEnvironmentTable'
 import OrganizationalChart from './organizationChart'
 import SideNav  from './stateSideNav'
-
-import {Link, Element, animateScroll as scroll} from 'react-scroll'
-
-
+import MissionStatement from './MissionStatement'
+import {Element, animateScroll as scroll} from 'react-scroll'
+import {Link} from 'react-router-dom'
 import '../../scss/StateOfCompany.scss'
+import MissionStatementForm from '../forms/MissionStatementForm'
 
 const StateOfCompany = () =>{
   const scrollToTop = () =>{
     scroll.scrollToTop()
   }
+
   return(
     <div className='state-container'>
       <div className='sidenav'>
@@ -25,7 +26,7 @@ const StateOfCompany = () =>{
         <section className='top'>
         <div className='missionStatement'>
           <h2>Mission Statement</h2>
-          <p>This is a mission statement- there will be a form to edit this</p>
+          <MissionStatement/>
         </div>
         </section>
         </Element>
