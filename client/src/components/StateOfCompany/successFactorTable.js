@@ -5,7 +5,7 @@ import '../../scss/StateOfCompany.scss'
 import axios from 'axios'
 
 
-const SuccessFactorTable = () =>{
+const SuccessFactorTable = (props) =>{
   const [success, setSuccess] = useState([])
     
   useEffect(() =>{
