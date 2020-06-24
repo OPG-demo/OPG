@@ -10,6 +10,7 @@ import {Element, animateScroll as scroll} from 'react-scroll'
 import {Link} from 'react-router-dom'
 import '../../scss/StateOfCompany.scss'
 import MissionStatementForm from '../forms/MissionStatementForm'
+import ExecutiveSummary from './ExecutiveSummary'
 
 const StateOfCompany = () =>{
   const scrollToTop = () =>{
@@ -57,7 +58,7 @@ const StateOfCompany = () =>{
         <Element name='executiveSummary'>
         <div className='executiveSummary'>
           <h2>Executive Summary</h2>
-          <p>This is a summary- there will be a form to edit this</p>
+          <ExecutiveSummary/>
         </div>
         </Element>
       </div>
