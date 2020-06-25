@@ -15,6 +15,7 @@ const reorder = (list, startIndex, endIndex) => {
 const OpportunityTable = () =>{
 
   const [data, setData] = useState([])
+  const [activeButton, setActiveButton] = useState('hide')
 
   useEffect(() =>{
     axios
@@ -41,6 +42,7 @@ const items = reorder(
 );
 
 setData(items)
+setActiveButton('show')
 }
 
 const handleSubmit = () =>{
@@ -49,6 +51,7 @@ const handleSubmit = () =>{
     .put(`http://localhost:8000/swot/${data[i].id}`, {priority: i + 1})
     .then(res =>{
       console.log('put req',res)
+      window.location.reload()
       // setData(res.data)
     })
     .catch(err =>{
@@ -59,7 +62,8 @@ const handleSubmit = () =>{
 
   return(
     <div className='dnd-container'>
-    <div className='list-header'><p>Priority</p><p>Title</p><p>Division</p><button onClick={handleSubmit}>Save Changes</button></div>
+    <button onClick={handleSubmit} className={activeButton}>Save Changes</button>
+    <div className='list-header'><p>Priority</p><p>Title</p><p>Division</p></div>
     <DragDropContext onDragEnd={onDragEnd}>
       <Droppable droppableId="droppable">
         {(provided) => (

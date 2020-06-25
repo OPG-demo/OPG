@@ -48,6 +48,16 @@
     flex-direction: column;
     box-sizing: border-box;
 
+    .hide{
+      display: none;
+    }
+    .show{
+      display: flex;
+      align-self: center;
+      justify-content: center;
+      width: 20%;
+    }
+
     .list-header{
       display: flex;
       justify-content: space-between;
@@ -63,8 +73,6 @@
         text-align: center;
         width: 100%;
       }
-
-      
     }
 
     .list-item{

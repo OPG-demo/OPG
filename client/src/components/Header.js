@@ -33,10 +33,10 @@ const Header = () => {
 					</div>
 				</div>
       </div>
-      <div className='sub-header'>
+      {/* <div className='sub-header'>
         <h1 className='title'>Dashboards</h1>
         <hr className='divider'></hr>
-      </div>
+      </div> */}
 		</div>
 	);
 };

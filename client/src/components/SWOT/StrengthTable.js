@@ -16,7 +16,7 @@ const reorder = (list, startIndex, endIndex) => {
 const StrengthTable = () =>{
 
   const [data, setData] = useState([])
-  const [activeButton, setActiveButton] = useState(false)
+  const [activeButton, setActiveButton] = useState('hide')
 
   useEffect(() =>{
     axios
@@ -31,6 +31,8 @@ const StrengthTable = () =>{
       })
   },[])
 
+  console.log('button before drag', activeButton)
+
   const onDragEnd = (result) => {
     // dropped outside the list
     if (!result.destination) {
@@ -44,7 +46,8 @@ const StrengthTable = () =>{
     );
     console.log(items)
     setData(items)
-    setActiveButton(true)
+    setActiveButton('show')
+    console.log('button after drag', activeButton)
   }
 
   const handleSubmit = () =>{
@@ -70,8 +73,8 @@ const StrengthTable = () =>{
 
   return(
     <div className='dnd-container'>
-    <div className='list-header'><p>Priority</p><p>Title</p><p>Division</p><button onClick={handleSubmit}>Save Changes</button>
-</div>
+    <button onClick={handleSubmit} className={activeButton}>Save Changes</button>
+    <div className='list-header'><p>Priority</p><p>Title</p><p>Division</p></div>
     <DragDropContext onDragEnd={onDragEnd}>
       <Droppable droppableId="droppable">
         {(provided) => (
