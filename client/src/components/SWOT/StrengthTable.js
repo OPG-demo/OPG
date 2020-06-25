@@ -49,18 +49,22 @@ const StrengthTable = () =>{
 
   const handleSubmit = () =>{
     for(let i = 0; i < data.length; i++){
+      console.log('inside for loop, before axios call', i)
       axios
       .put(`http://localhost:8000/swot/${data[i].id}`, {priority: i + 1})
       .then(res =>{
-        console.log('put req',res)
+        console.log('inside the .then')
+        window.location.reload()
         // setData(res.data)
       })
       .catch(err =>{
         console.log(err)
       })
+    }
+    console.log('outside the for loop')
   }
-  setData(data)
-  }
+  // window.location.reload()
+
   
 
 
