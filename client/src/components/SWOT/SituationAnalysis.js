@@ -23,8 +23,8 @@ const SituationAnalysis = () =>{
       </div>
 
       <div className='elements'>
-        <Accordion allowMultipleExpanded={true} allowZeroExpanded={true}>
-          <AccordionItem>
+        <Accordion allowMultipleExpanded={true} allowZeroExpanded={true} preExpanded={['strengths', 'weaknesses', 'opportunities', 'threats']}>
+          <AccordionItem uuid='strengths'>
             <Element name='strengths'>
               <section className='top'>
                 <div className='strength-container'>
@@ -32,7 +32,7 @@ const SituationAnalysis = () =>{
                   <div className='container'>
                     <AccordionItemHeading>
                       <AccordionItemButton>
-                        <i class="fas fa-align-justify"></i>
+                        <i className="fas fa-align-justify"></i>
                       </AccordionItemButton>
                     </AccordionItemHeading>
                     <AccordionItemPanel>
@@ -44,14 +44,14 @@ const SituationAnalysis = () =>{
             </Element>
           </AccordionItem>
 
-          <AccordionItem>
+          <AccordionItem uuid='weaknesses'>
             <Element name='weaknesses'>
               <div className='weakness-container'>
                 <h2>Weaknesses</h2>
                 <div className='container'>
                   <AccordionItemHeading>
                     <AccordionItemButton>
-                      <i class="fas fa-align-justify"></i>
+                      <i className="fas fa-align-justify"></i>
                     </AccordionItemButton>
                   </AccordionItemHeading>
                   <AccordionItemPanel>
@@ -62,14 +62,14 @@ const SituationAnalysis = () =>{
             </Element>
           </AccordionItem>
 
-          <AccordionItem>
+          <AccordionItem uuid='opportunities'>
             <Element name='opportunities'>
               <div className='opportunity-container'>
                 <h2>Opportunities</h2>
                 <div className='container'>
                   <AccordionItemHeading>
                     <AccordionItemButton>
-                      <i class="fas fa-align-justify"></i>
+                      <i className="fas fa-align-justify"></i>
                     </AccordionItemButton>
                   </AccordionItemHeading>
                   <AccordionItemPanel>
@@ -80,14 +80,14 @@ const SituationAnalysis = () =>{
             </Element>
           </AccordionItem>
 
-          <AccordionItem>
+          <AccordionItem uuid='threats'>
             <Element name='threats'>
               <div className='threat-container'>
                 <h2>Threats</h2>
                 <div className='container'>
                   <AccordionItemHeading>
                     <AccordionItemButton>
-                      <i class="fas fa-align-justify"></i>
+                      <i className="fas fa-align-justify"></i>
                     </AccordionItemButton>
                   </AccordionItemHeading>
                   <AccordionItemPanel>
@@ -100,7 +100,7 @@ const SituationAnalysis = () =>{
         </Accordion>
       </div>
       <div className='arrow'>
-        <i class="fas fa-arrow-up" onClick={scrollToTop}></i>
+        <i className="fas fa-arrow-up" onClick={scrollToTop}></i>
       </div>
     </div>
   )
