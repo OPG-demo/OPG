@@ -20,7 +20,7 @@ const CoreCompetencyTable = (props) =>{
       .get(`http://localhost:8000/corecomp`)
       .then(res =>{
         setCorecomp(res.data)
-        console.log('corecomp'. res.data)
+        console.log('corecomp'. res)
       })
       .catch(err =>{
         console.log(err)

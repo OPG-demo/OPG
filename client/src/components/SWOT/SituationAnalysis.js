@@ -32,7 +32,7 @@ const SituationAnalysis = () =>{
                   <div className='container'>
                     <AccordionItemHeading>
                       <AccordionItemButton>
-                        <i class="fas fa-align-justify"></i>
+                        <i className="fas fa-align-justify"></i>
                       </AccordionItemButton>
                     </AccordionItemHeading>
                     <AccordionItemPanel>
@@ -51,7 +51,7 @@ const SituationAnalysis = () =>{
                 <div className='container'>
                   <AccordionItemHeading>
                     <AccordionItemButton>
-                      <i class="fas fa-align-justify"></i>
+                      <i className="fas fa-align-justify"></i>
                     </AccordionItemButton>
                   </AccordionItemHeading>
                   <AccordionItemPanel>
@@ -69,7 +69,7 @@ const SituationAnalysis = () =>{
                 <div className='container'>
                   <AccordionItemHeading>
                     <AccordionItemButton>
-                      <i class="fas fa-align-justify"></i>
+                      <i className="fas fa-align-justify"></i>
                     </AccordionItemButton>
                   </AccordionItemHeading>
                   <AccordionItemPanel>
@@ -87,7 +87,7 @@ const SituationAnalysis = () =>{
                 <div className='container'>
                   <AccordionItemHeading>
                     <AccordionItemButton>
-                      <i class="fas fa-align-justify"></i>
+                      <i className="fas fa-align-justify"></i>
                     </AccordionItemButton>
                   </AccordionItemHeading>
                   <AccordionItemPanel>
@@ -100,7 +100,7 @@ const SituationAnalysis = () =>{
         </Accordion>
       </div>
       <div className='arrow'>
-        <i class="fas fa-arrow-up" onClick={scrollToTop}></i>
+        <i className="fas fa-arrow-up" onClick={scrollToTop}></i>
       </div>
     </div>
   )
