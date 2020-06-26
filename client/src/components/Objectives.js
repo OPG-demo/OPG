@@ -1,7 +1,8 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {Accordion, AccordionItem, AccordionItemHeading, AccordionItemButton, AccordionItemPanel} from 'react-accessible-accordion'
 import {DragDropContext, Droppable, Draggable} from 'react-beautiful-dnd'
 import '../scss/Objectives.scss'
+import axios from 'axios'
 
 const reorder = (list, startIndex, endIndex) => {
   const result = Array.from(list);
@@ -13,12 +14,34 @@ const reorder = (list, startIndex, endIndex) => {
 
 const Objectives = () =>{
 
-  const [data, setData] = useState([      
-    {description: 'Test threat', priority: '1', division: 'Executive', responsible: 'User1', due: '1/1/2020', update: '1/2/2020', completed: '1/3/2020', primaryswot: 'stuff'},
-    {description: 'Test threat 2 testing the wrap', priority: '2', division: 'Marketing', responsible: 'User2', due: '1/1/2020', update: '1/2/2020', completed: '1/3/2020', primaryswot: 'stuff'},
-    {description: 'Test threat 3', priority: '3', division: 'Executive', responsible: 'User1', due: '1/1/2020', update: '1/2/2020', completed: '1/3/2020', primaryswot: 'stuff'},
-    {description: 'Test threat 4', priority: '4', division: 'Operations', responsible: 'User3', due: '1/1/2020', update: '1/2/2020', completed: '1/3/2020', primaryswot: 'stuff'}
-])
+  const [data, setData] = useState([])
+  const [divName, setDivName] = useState()
+
+
+  useEffect(() =>{
+    axios
+      .get(`http://localhost:8000/objective`)
+      .then(res =>{
+        setData(res.data)
+        console.log(res.data[0].div_id)
+        for(let i = 0; i < res.data.length; i++){
+          axios
+          .get(`http://localhost:8000/division/${res.data[i].div_id}`)
+          .then(res =>{
+            setDivName(res.data.name)
+            console.log(res.data.name)
+          })
+          .catch(err =>{
+            console.log(err)
+          })
+        }
+      })
+      .catch(err =>{
+        console.log(err)
+      })
+  },[])
+  console.log(divName)
+
 
 const onDragEnd = (result) => {
   if (!result.destination) {
@@ -46,7 +69,7 @@ return(
           ref={provided.innerRef}
         >
           {data.map((item, index) => (
-            <Draggable key={item.description} draggableId={item.description} index={index}>
+            <Draggable key={item.id.toString()} draggableId={item.id.toString()} index={index}>
               {(provided) => (
                 <div
                   ref={provided.innerRef}
@@ -56,7 +79,7 @@ return(
                 <AccordionItem>
                   <AccordionItemHeading>
                     <AccordionItemButton className='accordion-button'>
-                     <div className='accordion-heading'><p>{index +1}</p><p className='desc'>{item.description}</p><p>{item.responsible}</p><p>{item.division}</p><p>{item.due}</p><p>{item.update}</p><p>{item.completed}</p><p>{item.primaryswot}</p></div>
+                     <div className='accordion-heading'><p>{item.priority}</p><p className='desc'>{item.description}</p><p>{item.responsible}</p><p>{divName}</p><p>{item.due_date}</p><p>{item.updated_date}</p><p>{item.completed_date}</p><p>{item.swot_ref}</p></div>
                     </AccordionItemButton>
                   </AccordionItemHeading>
                   <AccordionItemPanel>
