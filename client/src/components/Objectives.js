@@ -15,7 +15,6 @@ const reorder = (list, startIndex, endIndex) => {
 const Objectives = () =>{
 
   const [data, setData] = useState([])
-  const [divName, setDivName] = useState()
 
 
   useEffect(() =>{
@@ -23,24 +22,24 @@ const Objectives = () =>{
       .get(`http://localhost:8000/objective`)
       .then(res =>{
         setData(res.data)
-        console.log(res.data[0].div_id)
-        for(let i = 0; i < res.data.length; i++){
-          axios
-          .get(`http://localhost:8000/division/${res.data[i].div_id}`)
-          .then(res =>{
-            setDivName(res.data.name)
-            console.log(res.data.name)
-          })
-          .catch(err =>{
-            console.log(err)
-          })
-        }
+        console.log(res.data)
       })
       .catch(err =>{
         console.log(err)
       })
   },[])
-  console.log(divName)
+
+  const getDivName = (div_id) =>{
+    axios
+      .get(`http://localhost:8000/division/${div_id}`)
+      .then(res =>{
+        console.log('inside the call',res.data.name)
+        return res.data.name
+      })
+      .catch(err =>{
+        console.log(err)
+      })
+    }
 
 
 const onDragEnd = (result) => {
@@ -79,7 +78,12 @@ return(
                 <AccordionItem>
                   <AccordionItemHeading>
                     <AccordionItemButton className='accordion-button'>
-                     <div className='accordion-heading'><p>{item.priority}</p><p className='desc'>{item.description}</p><p>{item.responsible}</p><p>{divName}</p><p>{item.due_date}</p><p>{item.updated_date}</p><p>{item.completed_date}</p><p>{item.swot_ref}</p></div>
+                     <div className='accordion-heading'><p>{item.priority}</p><p className='desc'>{item.description}</p><p>{item.responsible}</p>
+
+                    <div>{getDivName(item.div_id)}</div>
+                    
+
+                     <p>{item.due_date}</p><p>{item.updated_date}</p><p>{item.completed_date}</p><p>{item.swot_ref}</p></div>
                     </AccordionItemButton>
                   </AccordionItemHeading>
                   <AccordionItemPanel>
