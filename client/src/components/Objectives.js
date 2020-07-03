@@ -13,9 +13,10 @@ const reorder = (list, startIndex, endIndex) => {
 };
 
 const Objectives = () =>{
-
   const [data, setData] = useState([])
-
+  const [division, setDivision] = useState([])
+  const [user, setUser] = useState([])
+  const [swot, setSwot] = useState([])
 
   useEffect(() =>{
     axios
@@ -29,17 +30,41 @@ const Objectives = () =>{
       })
   },[])
 
-  const getDivName = (div_id) =>{
+useEffect(() =>{
     axios
-      .get(`http://localhost:8000/division/${div_id}`)
-      .then(res =>{
-        console.log('inside the call',res.data.name)
-        return res.data.name
-      })
-      .catch(err =>{
-        console.log(err)
-      })
-    }
+    .get(`http://localhost:8000/division`)
+    .then(res =>{
+      setDivision(res.data)
+      console.log(res.data)
+    })
+    .catch(err =>{
+      console.log(err)
+    })
+},[])
+
+useEffect(() =>{
+  axios
+  .get(`http://localhost:8000/user`)
+  .then(res =>{
+    setUser(res.data)
+    console.log(res.data)
+  })
+  .catch(err =>{
+    console.log(err)
+  })
+},[])
+
+useEffect(() =>{
+  axios
+  .get(`http://localhost:8000/swot`)
+  .then(res =>{
+    setSwot(res.data)
+    console.log(res.data)
+  })
+  .catch(err =>{
+    console.log(err)
+  })
+},[])
 
 
 const onDragEnd = (result) => {
@@ -78,12 +103,32 @@ return(
                 <AccordionItem>
                   <AccordionItemHeading>
                     <AccordionItemButton className='accordion-button'>
-                     <div className='accordion-heading'><p>{item.priority}</p><p className='desc'>{item.description}</p><p>{item.responsible}</p>
+                     <div className='accordion-heading'>
+                      <p>{item.priority}</p>
+                      <p className='desc'>{item.description}</p>
+                      {user.map((x, responsible) =>{
+                        if(x.id === item.responsible){
+                          return(<p key={x.id}>{x.fullname}</p>)
+                        } 
+                      })}
+                      {division.map((x, div_id) =>{
+                        if(x.id === item.div_id){
+                          return(<p key={x.id}>{x.name}</p>)
+                        }
+                      })}
+                      {/* {GetDivName(item.div_id)} */}
+                      <p>{item.due_date}</p>
+                      <p>{item.updated_date}</p>
+                      <p>{item.completed_date}</p>
+                      {swot.map((x, swot_ref) =>{
+                        if(x.id === item.swot_ref[0]){
+                          return(<p key={x.id}>{x.priority}: {x.element}</p>)
+                        }
+                      })}
 
-                    <div>{getDivName(item.div_id)}</div>
-                    
 
-                     <p>{item.due_date}</p><p>{item.updated_date}</p><p>{item.completed_date}</p><p>{item.swot_ref}</p></div>
+
+                      </div>
                     </AccordionItemButton>
                   </AccordionItemHeading>
                   <AccordionItemPanel>
