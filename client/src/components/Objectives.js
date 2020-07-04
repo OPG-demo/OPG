@@ -17,6 +17,7 @@ const Objectives = () =>{
   const [division, setDivision] = useState([])
   const [user, setUser] = useState([])
   const [swot, setSwot] = useState([])
+  const [tactic, setTactic] = useState([])
 
   useEffect(() =>{
     axios
@@ -59,6 +60,18 @@ useEffect(() =>{
   .get(`http://localhost:8000/swot`)
   .then(res =>{
     setSwot(res.data)
+    console.log(res.data)
+  })
+  .catch(err =>{
+    console.log(err)
+  })
+},[])
+
+useEffect(() =>{
+  axios
+  .get(`http://localhost:8000/tactic`)
+  .then(res =>{
+    setTactic(res.data)
     console.log(res.data)
   })
   .catch(err =>{
@@ -121,7 +134,7 @@ return(
                       <p>{item.updated_date}</p>
                       <p>{item.completed_date}</p>
                       {swot.map((x, swot_ref) =>{
-                        if(x.id === item.swot_ref[0]){
+                        if(x.id === item.swot_ref){
                           return(<p key={x.id}>{x.priority}: {x.element}</p>)
                         }
                       })}
@@ -132,13 +145,48 @@ return(
                     </AccordionItemButton>
                   </AccordionItemHeading>
                   <AccordionItemPanel>
-                    <div className='accordion-panel'><p>{index +1}</p><p className='desc'>{item.description}</p></div>
+                    <div className='accordion-panel'>
+                      <h3>Primary SWOT</h3>
+                      {swot.map((x, swot_ref) =>{
+                        if(x.id === item.swot_ref){
+                          return(<p key={x.id}>{x.element}</p>)
+                        }
+                      })}
+                      {tactic.map((x, index) =>{
+                        if(x.obj_id === item.id){
+                          return(
+                            <div key={x.id} className="tactics">
+                              <p>{index + 1}</p>
+                              <p>{x.description}</p>
+                              <p>{x.due_date}</p>
+                              <p>{x.updated_date}</p>
+                              <p>{x.completed_date}</p>
+                            </div>
+                          )
+                        }
+                      })}
+
+
+{/* OK, so this only works if all the objectives have at least 1 committee member, maybe auto assign the responsible party to the committee on creation? */}
+                        {item.committee.map((x, index) =>{
+                          return(<div key={index}>
+                            {user.map((k, index) =>{
+                              if(k.id === x){
+                                return(<p key={k.id}>{k.fullname}</p>)
+                              }
+                            })}
+                          </div>)
+                        })}
+                      
+
+
+                    </div>
                   </AccordionItemPanel>
                 </AccordionItem>
                 </div>
               )}
             </Draggable>
-          ))}
+      ))}
           {provided.placeholder}
         </div>
       )}
