@@ -18,6 +18,7 @@ const Objectives = () =>{
   const [user, setUser] = useState([])
   const [swot, setSwot] = useState([])
   const [tactic, setTactic] = useState([])
+  const [corecomp, setCorecomp] = useState([])
 
   useEffect(() =>{
     axios
@@ -72,6 +73,18 @@ useEffect(() =>{
   .get(`http://localhost:8000/tactic`)
   .then(res =>{
     setTactic(res.data)
+    console.log(res.data)
+  })
+  .catch(err =>{
+    console.log(err)
+  })
+},[])
+
+useEffect(() =>{
+  axios
+  .get(`http://localhost:8000/corecomp`)
+  .then(res =>{
+    setCorecomp(res.data)
     console.log(res.data)
   })
   .catch(err =>{
@@ -167,12 +180,20 @@ return(
                       })}
 
 
-{/* OK, so this only works if all the objectives have at least 1 committee member, maybe auto assign the responsible party to the committee on creation? */}
                         {item.committee.map((x, index) =>{
                           return(<div key={index}>
                             {user.map((k, index) =>{
                               if(k.id === x){
                                 return(<p key={k.id}>{k.fullname}</p>)
+                              }
+                            })}
+                          </div>)
+                        })}
+                        {item.corecomp.map((x, index) =>{
+                          return(<div key={index}>
+                            {corecomp.map((k, index) =>{
+                              if(k.id === x){
+                                return(<p key={k.id}>{k.description}</p>)
                               }
                             })}
                           </div>)
