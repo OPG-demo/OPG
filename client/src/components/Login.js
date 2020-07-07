@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 import {Link} from 'react-router-dom'
 
@@ -21,6 +21,8 @@ const Login = props =>{
         headers
       )
       .then(res =>{
+        localStorage.setItem('user', res.data.id)
+        console.log(res.data.id)
         localStorage.setItem("authorization", res.data.key)
         props.history.push('/dashboards')
       })
