@@ -1,13 +1,16 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 
-const MissionStatementForm = props =>{
+const MissionStatementAddForm = props =>{
   const [missionStatement, setMissionStatement] = useState()
+
+  const loggedInUser = parseInt(localStorage.getItem('user'))
+  const loggedInUserOrg = parseInt(localStorage.getItem('org'))
 
   const handleSubmit = e =>{
     e.preventDefault()
     axios
-      .put(`http://localhost:8000/org/${props.match.params.id}`)
+      .post(`http://localhost:8000/org/${loggedInUserOrg}`)
       .then(res =>{
         console.log(JSON.parse(res.config.data))
       })
@@ -29,8 +32,9 @@ const MissionStatementForm = props =>{
         name="mission"
         onChange={handleChanges}
       />
+      <button type='submit'>Add</button>
     </form>
   )
 }
 
-export default MissionStatementForm
+export default MissionStatementAddForm

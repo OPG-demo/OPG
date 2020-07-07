@@ -7,10 +7,13 @@ import axios from 'axios'
 
 const SuccessFactorTable = (props) =>{
   const [success, setSuccess] = useState([])
+
+  const loggedInUser = parseInt(localStorage.getItem('user'))
+  const loggedInUserOrg = parseInt(localStorage.getItem('org'))
     
   useEffect(() =>{
     axios
-      .get(`http://localhost:8000/iksf`)
+      .get(`http://localhost:8000/iksf/org/${loggedInUserOrg}`)
       .then(res =>{
         setSuccess(res.data)
         console.log('success',res.data)

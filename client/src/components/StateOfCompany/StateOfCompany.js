@@ -7,7 +7,7 @@ import SideNav  from './stateSideNav'
 import MissionStatement from './MissionStatement'
 import {Element, animateScroll as scroll} from 'react-scroll'
 import '../../scss/StateOfCompany.scss'
-import MissionStatementForm from '../forms/MissionStatementForm'
+import MissionStatementForm from '../forms/MissionStatementAddForm'
 import ExecutiveSummary from './ExecutiveSummary'
 
 const StateOfCompany = () =>{
@@ -61,7 +61,7 @@ const StateOfCompany = () =>{
         </Element>
       </div>
       <div className='arrow'>
-        <i class="fas fa-arrow-up" onClick={scrollToTop}></i>
+        <i className="fas fa-arrow-up" onClick={scrollToTop}></i>
       </div>
     </div>
   )

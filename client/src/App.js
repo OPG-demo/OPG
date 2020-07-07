@@ -11,6 +11,7 @@ import SituationAnalysis from './components/SWOT/SituationAnalysis';
 import Objectives from './components/Objectives'
 import Login from './components/Login'
 
+
 function App() {
   return (
     <div className="App">

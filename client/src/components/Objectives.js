@@ -20,9 +20,12 @@ const Objectives = () =>{
   const [tactic, setTactic] = useState([])
   const [corecomp, setCorecomp] = useState([])
 
+  const loggedInUser = parseInt(localStorage.getItem('user'))
+  const loggedInUserOrg = parseInt(localStorage.getItem('org'))
+
   useEffect(() =>{
     axios
-      .get(`http://localhost:8000/objective`)
+      .get(`http://localhost:8000/objective/org/${loggedInUserOrg}`)
       .then(res =>{
         setData(res.data)
         console.log(res.data)
@@ -34,7 +37,7 @@ const Objectives = () =>{
 
 useEffect(() =>{
     axios
-    .get(`http://localhost:8000/division`)
+    .get(`http://localhost:8000/division/org/${loggedInUserOrg}`)
     .then(res =>{
       setDivision(res.data)
       console.log(res.data)
@@ -46,7 +49,7 @@ useEffect(() =>{
 
 useEffect(() =>{
   axios
-  .get(`http://localhost:8000/user`)
+  .get(`http://localhost:8000/user/org/${loggedInUserOrg}`)
   .then(res =>{
     setUser(res.data)
     console.log(res.data)
@@ -58,7 +61,7 @@ useEffect(() =>{
 
 useEffect(() =>{
   axios
-  .get(`http://localhost:8000/swot`)
+  .get(`http://localhost:8000/swot/org/${loggedInUserOrg}`)
   .then(res =>{
     setSwot(res.data)
     console.log(res.data)
@@ -70,7 +73,7 @@ useEffect(() =>{
 
 useEffect(() =>{
   axios
-  .get(`http://localhost:8000/tactic`)
+  .get(`http://localhost:8000/tactic/org/${loggedInUserOrg}`)
   .then(res =>{
     setTactic(res.data)
     console.log(res.data)
@@ -82,10 +85,10 @@ useEffect(() =>{
 
 useEffect(() =>{
   axios
-  .get(`http://localhost:8000/corecomp`)
+  .get(`http://localhost:8000/corecomp/org/${loggedInUserOrg}`)
   .then(res =>{
     setCorecomp(res.data)
-    console.log(res.data)
+    console.log('corecomp',res.data)
   })
   .catch(err =>{
     console.log(err)

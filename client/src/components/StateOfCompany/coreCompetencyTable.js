@@ -4,23 +4,19 @@ import axios from 'axios'
 
 import '../../scss/StateOfCompany.scss'
 
-
-const tableData = [
-  {priority: 1, description: 'test', division: 'Executive', iksf: null, scope: 'Present'},
-  {priority: 2, description: 'test2', division: 'Marketing', iksf: 2, scope: 'Present'},
-  {priority: 3, description: 'test3', division: 'Executive', iksf: null, scope: 'Future'},
-  {priority: 4, description: 'test4', division: 'Operations', iksf: null, scope: 'Present'},
-]
-
 const CoreCompetencyTable = (props) =>{
   const [corecomp, setCorecomp] = useState([])
+  console.log('corecomp',corecomp)
+
+  const loggedInUser = parseInt(localStorage.getItem('user'))
+  const loggedInUserOrg = parseInt(localStorage.getItem('org'))
 
   useEffect(() =>{
     axios
-      .get(`http://localhost:8000/corecomp`)
+      .get(`http://localhost:8000/corecomp/org/${loggedInUserOrg}`)
       .then(res =>{
         setCorecomp(res.data)
-        console.log('corecomp'. res)
+        console.log('res',res)
       })
       .catch(err =>{
         console.log(err)

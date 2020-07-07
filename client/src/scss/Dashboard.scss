@@ -28,6 +28,37 @@
         margin-right: 1rem;
       }
     }
+
+    .chart-keys{
+      display: flex;
+      justify-content: space-evenly;
+      width: 40%;
+      margin: auto;
+      text-align: center;
+      color: white;
+      font-weight: bold;
+      margin-top: 2rem;
+
+      p{
+        width: 6rem;
+        border-radius: 55px;
+      }
+
+      .chart-key-complete{
+        background-color: #005ca3;
+
+      }
+      .chart-key-overdue{
+        background-color: #a30e03;
+      }
+      .chart-key-pending{
+        background-color: #145c02;
+      }
+      .chart-key-incomplete{
+        background-color: #c9bc04;
+      }
+    }
+
   }
 
   .company-dashboard{
