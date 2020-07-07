@@ -13,34 +13,84 @@ const reorder = (list, startIndex, endIndex) => {
 };
 
 const Objectives = () =>{
-
   const [data, setData] = useState([])
-  const [divName, setDivName] = useState()
-
+  const [division, setDivision] = useState([])
+  const [user, setUser] = useState([])
+  const [swot, setSwot] = useState([])
+  const [tactic, setTactic] = useState([])
+  const [corecomp, setCorecomp] = useState([])
 
   useEffect(() =>{
     axios
       .get(`http://localhost:8000/objective`)
       .then(res =>{
         setData(res.data)
-        console.log(res.data[0].div_id)
-        for(let i = 0; i < res.data.length; i++){
-          axios
-          .get(`http://localhost:8000/division/${res.data[i].div_id}`)
-          .then(res =>{
-            setDivName(res.data.name)
-            console.log(res.data.name)
-          })
-          .catch(err =>{
-            console.log(err)
-          })
-        }
+        console.log(res.data)
       })
       .catch(err =>{
         console.log(err)
       })
   },[])
-  console.log(divName)
+
+useEffect(() =>{
+    axios
+    .get(`http://localhost:8000/division`)
+    .then(res =>{
+      setDivision(res.data)
+      console.log(res.data)
+    })
+    .catch(err =>{
+      console.log(err)
+    })
+},[])
+
+useEffect(() =>{
+  axios
+  .get(`http://localhost:8000/user`)
+  .then(res =>{
+    setUser(res.data)
+    console.log(res.data)
+  })
+  .catch(err =>{
+    console.log(err)
+  })
+},[])
+
+useEffect(() =>{
+  axios
+  .get(`http://localhost:8000/swot`)
+  .then(res =>{
+    setSwot(res.data)
+    console.log(res.data)
+  })
+  .catch(err =>{
+    console.log(err)
+  })
+},[])
+
+useEffect(() =>{
+  axios
+  .get(`http://localhost:8000/tactic`)
+  .then(res =>{
+    setTactic(res.data)
+    console.log(res.data)
+  })
+  .catch(err =>{
+    console.log(err)
+  })
+},[])
+
+useEffect(() =>{
+  axios
+  .get(`http://localhost:8000/corecomp`)
+  .then(res =>{
+    setCorecomp(res.data)
+    console.log(res.data)
+  })
+  .catch(err =>{
+    console.log(err)
+  })
+},[])
 
 
 const onDragEnd = (result) => {
@@ -79,17 +129,85 @@ return(
                 <AccordionItem>
                   <AccordionItemHeading>
                     <AccordionItemButton className='accordion-button'>
-                     <div className='accordion-heading'><p>{item.priority}</p><p className='desc'>{item.description}</p><p>{item.responsible}</p><p>{divName}</p><p>{item.due_date}</p><p>{item.updated_date}</p><p>{item.completed_date}</p><p>{item.swot_ref}</p></div>
+                     <div className='accordion-heading'>
+                      <p>{item.priority}</p>
+                      <p className='desc'>{item.description}</p>
+                      {user.map((x, responsible) =>{
+                        if(x.id === item.responsible){
+                          return(<p key={x.id}>{x.fullname}</p>)
+                        } 
+                      })}
+                      {division.map((x, div_id) =>{
+                        if(x.id === item.div_id){
+                          return(<p key={x.id}>{x.name}</p>)
+                        }
+                      })}
+                      {/* {GetDivName(item.div_id)} */}
+                      <p>{item.due_date}</p>
+                      <p>{item.updated_date}</p>
+                      <p>{item.completed_date}</p>
+                      {swot.map((x, swot_ref) =>{
+                        if(x.id === item.swot_ref){
+                          return(<p key={x.id}>{x.priority}: {x.element}</p>)
+                        }
+                      })}
+
+
+
+                      </div>
                     </AccordionItemButton>
                   </AccordionItemHeading>
                   <AccordionItemPanel>
-                    <div className='accordion-panel'><p>{index +1}</p><p className='desc'>{item.description}</p></div>
+                    <div className='accordion-panel'>
+                      <h3>Primary SWOT</h3>
+                      {swot.map((x, swot_ref) =>{
+                        if(x.id === item.swot_ref){
+                          return(<p key={x.id}>{x.element}</p>)
+                        }
+                      })}
+                      {tactic.map((x, index) =>{
+                        if(x.obj_id === item.id){
+                          return(
+                            <div key={x.id} className="tactics">
+                              <p>{index + 1}</p>
+                              <p>{x.description}</p>
+                              <p>{x.due_date}</p>
+                              <p>{x.updated_date}</p>
+                              <p>{x.completed_date}</p>
+                            </div>
+                          )
+                        }
+                      })}
+
+
+                        {item.committee.map((x, index) =>{
+                          return(<div key={index}>
+                            {user.map((k, index) =>{
+                              if(k.id === x){
+                                return(<p key={k.id}>{k.fullname}</p>)
+                              }
+                            })}
+                          </div>)
+                        })}
+                        {item.corecomp.map((x, index) =>{
+                          return(<div key={index}>
+                            {corecomp.map((k, index) =>{
+                              if(k.id === x){
+                                return(<p key={k.id}>{k.description}</p>)
+                              }
+                            })}
+                          </div>)
+                        })}
+                      
+
+
+                    </div>
                   </AccordionItemPanel>
                 </AccordionItem>
                 </div>
               )}
             </Draggable>
-          ))}
+      ))}
           {provided.placeholder}
         </div>
       )}

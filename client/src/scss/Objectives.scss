@@ -65,6 +65,17 @@
 
   .accordion-panel{
     display: flex;
+    flex-direction: column;
     justify-content: space-evenly;
+    align-items: center;
+
+    h3{
+      border-bottom: 1px solid black;
+    }
+
+    .tactics{
+      display: flex;
+      justify-content: space-evenly;
+    }
   }
 }
