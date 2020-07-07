@@ -8,8 +8,10 @@ import axios from 'axios'
 const Dashboard = () =>{
   const [objective, setObjective] = useState([])
   const [tactic, setTactic] = useState([])
+  const [division, setDivision] = useState([])
 
   const loggedInUser = parseInt(localStorage.getItem('user'))
+  const loggedInUserOrg = parseInt(localStorage.getItem('org'))
 
   const today = new Date
 
@@ -29,6 +31,17 @@ const Dashboard = () =>{
       .get(`http://localhost:8000/tactic`)
       .then(res =>{
         setTactic(res.data)
+      })
+      .catch(err =>{
+        console.log(err)
+      })
+  },[])
+
+  useEffect(() =>{
+    axios
+      .get(`http://localhost:8000/division`)
+      .then(res =>{
+        setDivision(res.data)
       })
       .catch(err =>{
         console.log(err)
@@ -68,7 +81,8 @@ const Dashboard = () =>{
       backgroundColor: [
       '#011638',
       '#607466',
-      '#435058'
+      '#435058',
+      '#deeb34'
       ]
     }]
   
@@ -108,7 +122,8 @@ const Dashboard = () =>{
       backgroundColor: [
       '#011638',
       '#607466',
-      '#435058'
+      '#435058',
+      '#deeb34'
       ]
     }]
   };
@@ -146,14 +161,103 @@ const Dashboard = () =>{
       backgroundColor: [
       '#011638',
       '#607466',
-      '#435058'
+      '#435058',
+      '#deeb34'
       ]
     }]
   };
   
-  const dataPack1 =[1,3,2,2,5]
-  const dataPack2 =[3,4,2,3,1]
-  const dataPack3 =[1,4,5,3,5]
+  const completeOps = []
+  const overdueOps = []
+  const pendingOps = []
+  const incompleteOps = []
+
+  const completeMarketing = []
+  const overdueMarketing = []
+  const pendingMarketing = []
+  const incompleteMarketing = []
+
+  const completeFinance = []
+  const overdueFinance = []
+  const pendingFinance = []
+  const incompleteFinance = []
+
+  const completeOpg = []
+  const overdueOpg = []
+  const pendingOpg = []
+  const incompleteOpg = []
+
+  const completeExec = []
+  const overdueExec = []
+  const pendingExec = []
+  const incompleteExec = []
+
+
+  objective.map((x, index) =>{
+    if(x.org_id === loggedInUserOrg){
+      division.map((i, index) =>{
+        if(x.div_id === i.id){
+          if(i.name === 'operations'){
+            if(x.completed_date !== null){
+              completeOps.push(x)
+            } else if(x.due_date === null && x.updated_date === null && x.completed_date === null){
+              incompleteOps.push(x)
+            } else if(x.due_date > today.toISOString() || x.updated_date > today.toISOString()){
+              pendingOps.push(x)
+            } else {
+              overdueOps.push(x)
+            }
+          } else if(i.name === 'marketing'){
+            if(x.completed_date !== null){
+              completeMarketing.push(x)
+            } else if(x.due_date === null && x.updated_date === null && x.completed_date === null){
+              incompleteMarketing.push(x)
+            } else if(x.due_date > today.toISOString() || x.updated_date > today.toISOString()){
+              pendingMarketing.push(x)
+            } else {
+              overdueMarketing.push(x)
+            }
+          } else if(i.name === 'finance'){
+            if(x.completed_date !== null){
+              completeFinance.push(x)
+            } else if(x.due_date === null && x.updated_date === null && x.completed_date === null){
+              incompleteFinance.push(x)
+            } else if(x.due_date > today.toISOString() || x.updated_date > today.toISOString()){
+              pendingFinance.push(x)
+            } else {
+              overdueFinance.push(x)
+            }
+          } else if(i.name === 'opg'){
+            if(x.completed_date !== null){
+              completeOpg.push(x)
+            } else if(x.due_date === null && x.updated_date === null && x.completed_date === null){
+              incompleteOpg.push(x)
+            } else if(x.due_date > today.toISOString() || x.updated_date > today.toISOString()){
+              pendingOpg.push(x)
+            } else {
+              overdueOpg.push(x)
+            }
+          } else if(i.name === 'exec'){
+            if(x.completed_date !== null){
+              completeExec.push(x)
+            } else if(x.due_date === null && x.updated_date === null && x.completed_date === null){
+              incompleteExec.push(x)
+            } else if(x.due_date > today.toISOString() || x.updated_date > today.toISOString()){
+              pendingExec.push(x)
+            } else {
+              overdueExec.push(x)
+            }
+          }
+        }
+      })
+    }
+  })
+
+
+  const dataPack1 =[completeOps.length,completeMarketing.length,completeFinance.length,completeOpg.length,completeExec.length]
+  const dataPack2 =[overdueOps.length,overdueMarketing.length,overdueFinance.length,overdueOpg.length,overdueExec.length]
+  const dataPack3 =[pendingOps.length,pendingMarketing.length,pendingFinance.length,pendingOpg.length,pendingExec.length]
+  const dataPack4 =[incompleteOps.length, incompleteMarketing.length,incompleteFinance.length,incompleteOpg.length,incompleteExec.length]
   
   
   const companyData = {
@@ -174,6 +278,11 @@ const Dashboard = () =>{
         label: ["Pending"],
         backgroundColor: '#435058',
         data: dataPack3,
+      },
+      {
+        label: ["Incomplete"],
+        backgroundColor: '#deeb34',
+        data: dataPack4,
       }
     ]
   }

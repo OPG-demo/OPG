@@ -22,6 +22,7 @@ const Login = props =>{
       )
       .then(res =>{
         localStorage.setItem('user', res.data.id)
+        localStorage.setItem('org', res.data.org)
         console.log(res.data.id)
         localStorage.setItem("authorization", res.data.key)
         props.history.push('/dashboards')
