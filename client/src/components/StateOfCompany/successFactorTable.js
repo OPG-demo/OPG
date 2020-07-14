@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import {Icon, Label, Menu, Table} from 'semantic-ui-react'
-
+import {Link} from 'react-router-dom'
 import '../../scss/StateOfCompany.scss'
 import axios from 'axios'
 
@@ -44,6 +44,9 @@ const SuccessFactorTable = (props) =>{
           )}
         </Table.Body>
       </Table>
+      <Link to='/addsuccess'>
+            <i className="fas fa-plus"></i>
+      </Link>
     </div>
   )
 }
