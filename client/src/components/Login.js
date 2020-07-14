@@ -18,7 +18,6 @@ const Login = (props) =>{
     .then(res =>{
       localStorage.setItem('user', res.data.id)
       localStorage.setItem('org', res.data.org)
-      console.log(res.data.id)
       localStorage.setItem("authorization", res.data.key)
       props.history.push('/dashboards')
     })
@@ -37,6 +36,7 @@ const Login = (props) =>{
           placeholder="Username"
           ref={register({required: true})}
         />
+        {errors.username && <p>Username is required</p>}
         <input
           className="input"
           type="password"
@@ -44,6 +44,7 @@ const Login = (props) =>{
           placeholder="Password"
           ref={register({required: true})}
         />
+        {errors.pwdhash && <p>Password is required</p>}
         <input type="submit" className='login-button'/>
       </form>
     </div>
