@@ -13,19 +13,31 @@ const MissionStatement = () =>{
       .get(`http://localhost:8000/org/${loggedInUserOrg}`)
       .then(res =>{
         setMission(res.data.mission)
-        console.log(res)
       })
       .catch(err =>{
         console.log(err)
       })
   },[])
 
+  const MissionRender = () =>{
+    if(mission === null){
+      return(<div>
+        <p>Add a mission statment</p>
+        <Link to='/addmission'>
+        <i className="fas fa-plus"></i></Link></div>)
+    } else {
+      return(<div>
+        <p>{mission}</p>
+        <Link to='/addmission'>
+        <i className="fas fa-pen"></i></Link>
+      </div>)
+    }
+  }
+
 
   return(
     <div className='mission-container'>
-      <p>{mission}</p>
-        <i class="fas fa-plus"></i>
-      <i class="fas fa-pen"></i>
+      <MissionRender/>
     </div>
   )
 }

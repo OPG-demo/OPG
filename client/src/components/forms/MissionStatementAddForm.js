@@ -1,40 +1,65 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
+import {Form, Field, withFormik} from 'formik'
+import * as yup from 'yup'
+import MissionStatement from '../stateOfCompany/MissionStatement'
 
-const MissionStatementAddForm = props =>{
+const MissionStatementAddForm = ({errors, touched, values, status}) =>{
   const [missionStatement, setMissionStatement] = useState()
+  const [initial, setInitial] = useState()
 
   const loggedInUser = parseInt(localStorage.getItem('user'))
   const loggedInUserOrg = parseInt(localStorage.getItem('org'))
 
-  const handleSubmit = e =>{
-    e.preventDefault()
-    axios
-      .post(`http://localhost:8000/org/${loggedInUserOrg}`)
-      .then(res =>{
-        console.log(JSON.parse(res.config.data))
-      })
-      .catch(err =>{
-        console.log(err)
-      })
-  }
+  useEffect(() =>{
+    if (status){
+      setMissionStatement([...missionStatement, status])
+    }
+  },[status])
 
-  const handleChanges = e =>{
-    e.preventDefault()
-    setMissionStatement({...missionStatement, [e.target.name]: e.target.value})
-  }
+  axios
+  .get(`http://localhost:8000/org/${loggedInUserOrg}`)
+  .then(res =>{
+    setInitial(res.data.mission)
+    console.log(res.data.mission)
+  })
+  .catch(err =>{
+    console.log(err)
+  })
+
 
   return(
-    <form onSubmit={handleSubmit}>
-      <input
+    <Form>
+      <Field
+        as="textarea"
+        className='input'
         type="textarea"
-        placeholder={missionStatement}
         name="mission"
-        onChange={handleChanges}
       />
-      <button type='submit'>Add</button>
-    </form>
+      <button type='submit'>Submit</button>
+    </Form>
   )
 }
 
-export default MissionStatementAddForm
+const FormikMissionStatementAddForm = withFormik({
+  mapPropsToValues({mission}){
+    return{
+      mission: mission || 'stuff'
+    }
+  },
+
+  handleSubmit(missionStatement, {props, setStatus}){
+    const loggedInUserOrg = parseInt(localStorage.getItem('org'))
+
+    axios
+    .put(`http://localhost:8000/org/${loggedInUserOrg}`, missionStatement)
+    .then(res =>{
+      props.history.push('/stateofcompany')
+    })
+    .catch(err =>{
+      console.log(err)
+    })
+  }
+})(MissionStatementAddForm)
+
+export default FormikMissionStatementAddForm

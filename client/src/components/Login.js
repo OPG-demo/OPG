@@ -1,64 +1,76 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
-import {Link} from 'react-router-dom'
+import {Form, Field, withFormik} from 'formik'
+import * as yup from 'yup'
 
-const Login = props =>{
+const Login = ({errors, touched, values, status}) =>{
   const [credentials, setCredentials] = useState({
     username: "",
     pwdhash: ""
   })
 
-  const headers = {
-    "Content-Type": "application/json"
-  }
+  useEffect(() =>{
+    if (status){
+      setCredentials(credentials => status)
+    }
+  },[status])
 
-  const handleSubmit = e =>{
-    e.preventDefault()
-    axios
-      .post(
-        "http://localhost:8000/login",
-        credentials,
-        headers
-      )
-      .then(res =>{
-        localStorage.setItem('user', res.data.id)
-        localStorage.setItem('org', res.data.org)
-        console.log(res.data.id)
-        localStorage.setItem("authorization", res.data.key)
-        props.history.push('/dashboards')
-      })
-      .catch(err =>{
-        console.log(err.response)
-        setCredentials({
-          username: "",
-          pwdhash: ""
-        })
-      })
-  }
-
-  const handleChange = e =>{
-    setCredentials({...credentials, [e.target.name]: e.target.value})
-  }
 
   return(
     <div className='login-container'>
-      <form onSubmit={handleSubmit}>
-        <input
+      <Form>
+        <Field
+          className="input"
           type="text"
           name="username"
           placeholder="Username"
-          onChange={handleChange}
         />
-        <input
+        {touched.username && errors.username && (
+          <p className='error'>{errors.username}</p>
+        )}
+        <Field
+          className="input"
           type="password"
           name="pwdhash"
           placeholder="Password"
-          onChange={handleChange}
         />
-        <button type="submit">Login</button>
-      </form>
+        {touched.pwdhash && errors.pwdhash && (
+          <p className='error'>{errors.pwdhash}</p>
+        )}
+        <button type="submit" className='login-button'>Login</button>
+      </Form>
     </div>
   )
 }
 
-export default Login;
+const FormikLogin = withFormik({
+  mapPropsToValues({username, pwdhash}){
+    return{
+      username: username || '',
+      pwdhash: pwdhash || ''
+    }
+  },
+  validationSchema: yup.object().shape({
+    username: yup.string().required('Username is required'),
+    pwdhash: yup.string().required('Password is required')
+  }),
+  handleSubmit(credentials, {props, setStatus}){
+    axios
+    .post(
+      "http://localhost:8000/login",
+      credentials
+    )
+    .then(res =>{
+      localStorage.setItem('user', res.data.id)
+      localStorage.setItem('org', res.data.org)
+      console.log(res.data.id)
+      localStorage.setItem("authorization", res.data.key)
+      props.history.push('/dashboards')
+    })
+    .catch(err =>{
+      console.log(err.response)
+    })
+  }
+})(Login)
+
+export default FormikLogin;
