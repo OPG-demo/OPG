@@ -7,7 +7,7 @@ import SideNav  from './stateSideNav'
 import MissionStatement from './MissionStatement'
 import {Element, animateScroll as scroll} from 'react-scroll'
 import '../../scss/StateOfCompany.scss'
-import MissionStatementForm from '../forms/MissionStatementAddForm'
+import MissionStatementForm from '../forms/MissionStatementForm'
 import ExecutiveSummary from './ExecutiveSummary'
 
 const StateOfCompany = () =>{

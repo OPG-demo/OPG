@@ -16,7 +16,6 @@ const SuccessFactorTable = (props) =>{
       .get(`http://localhost:8000/iksf/org/${loggedInUserOrg}`)
       .then(res =>{
         setSuccess(res.data)
-        console.log('success',res.data)
       })
       .catch(err =>{
         console.log(err)

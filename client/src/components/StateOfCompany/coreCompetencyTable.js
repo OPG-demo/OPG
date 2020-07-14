@@ -6,7 +6,6 @@ import '../../scss/StateOfCompany.scss'
 
 const CoreCompetencyTable = (props) =>{
   const [corecomp, setCorecomp] = useState([])
-  console.log('corecomp',corecomp)
 
   const loggedInUser = parseInt(localStorage.getItem('user'))
   const loggedInUserOrg = parseInt(localStorage.getItem('org'))
@@ -16,7 +15,6 @@ const CoreCompetencyTable = (props) =>{
       .get(`http://localhost:8000/corecomp/org/${loggedInUserOrg}`)
       .then(res =>{
         setCorecomp(res.data)
-        console.log('res',res)
       })
       .catch(err =>{
         console.log(err)

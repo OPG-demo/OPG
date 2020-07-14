@@ -12,7 +12,6 @@ const ExecutiveSummary = () =>{
       .get(`http://localhost:8000/org/${loggedInUserOrg}`)
       .then(res =>{
         setSummary(res.data.execsummary)
-        console.log(res)
       })
       .catch(err =>{
         console.log(err)

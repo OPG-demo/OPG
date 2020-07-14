@@ -10,7 +10,7 @@ import StateOfCompany from './components/stateOfCompany/StateOfCompany';
 import SituationAnalysis from './components/SWOT/SituationAnalysis';
 import Objectives from './components/Objectives'
 import Login from './components/Login'
-import MissionStatementAddForm from './components/forms/MissionStatementAddForm';
+import MissionStatementAddForm from './components/forms/MissionStatementForm';
 
 
 function App() {

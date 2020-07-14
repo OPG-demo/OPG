@@ -1,60 +1,15 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
-import {Form, Field, withFormik} from 'formik'
-import * as yup from 'yup'
+import {useForm} from 'react-hook-form'
 
-const Login = ({errors, touched, values, status}) =>{
+const Login = (props) =>{
   const [credentials, setCredentials] = useState({
     username: "",
     pwdhash: ""
   })
+  const {register, handleSubmit, watch, errors} = useForm()
 
-  useEffect(() =>{
-    if (status){
-      setCredentials(credentials => status)
-    }
-  },[status])
-
-
-  return(
-    <div className='login-container'>
-      <Form>
-        <Field
-          className="input"
-          type="text"
-          name="username"
-          placeholder="Username"
-        />
-        {touched.username && errors.username && (
-          <p className='error'>{errors.username}</p>
-        )}
-        <Field
-          className="input"
-          type="password"
-          name="pwdhash"
-          placeholder="Password"
-        />
-        {touched.pwdhash && errors.pwdhash && (
-          <p className='error'>{errors.pwdhash}</p>
-        )}
-        <button type="submit" className='login-button'>Login</button>
-      </Form>
-    </div>
-  )
-}
-
-const FormikLogin = withFormik({
-  mapPropsToValues({username, pwdhash}){
-    return{
-      username: username || '',
-      pwdhash: pwdhash || ''
-    }
-  },
-  validationSchema: yup.object().shape({
-    username: yup.string().required('Username is required'),
-    pwdhash: yup.string().required('Password is required')
-  }),
-  handleSubmit(credentials, {props, setStatus}){
+  const onSubmit = (credentials) =>{
     axios
     .post(
       "http://localhost:8000/login",
@@ -71,6 +26,28 @@ const FormikLogin = withFormik({
       console.log(err.response)
     })
   }
-})(Login)
 
-export default FormikLogin;
+
+  return(
+    <div className='login-container'>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <input
+          className="input"
+          name="username"
+          placeholder="Username"
+          ref={register({required: true})}
+        />
+        <input
+          className="input"
+          type="password"
+          name="pwdhash"
+          placeholder="Password"
+          ref={register({required: true})}
+        />
+        <input type="submit" className='login-button'/>
+      </form>
+    </div>
+  )
+}
+
+export default Login;
