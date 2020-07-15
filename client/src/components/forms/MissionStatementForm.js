@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 import {useForm} from 'react-hook-form'
-import MissionStatement from '../stateOfCompany/MissionStatement'
 
 const MissionStatementForm = (props) =>{
   const [missionStatement, setMissionStatement] = useState()
@@ -11,15 +10,17 @@ const MissionStatementForm = (props) =>{
   const loggedInUser = parseInt(localStorage.getItem('user'))
   const loggedInUserOrg = parseInt(localStorage.getItem('org'))
 
-  axios
-  .get(`http://localhost:8000/org/${loggedInUserOrg}`)
-  .then(res =>{
-    setInitial(res.data.mission)
-    console.log(res.data.mission)
-  })
-  .catch(err =>{
-    console.log(err)
-  })
+  useEffect(() =>{
+    axios
+    .get(`http://localhost:8000/org/${loggedInUserOrg}`)
+    .then(res =>{
+      setInitial(res.data.mission)
+    })
+    .catch(err =>{
+      console.log(err)
+    })
+  },[])
+
 
   const onSubmit = (missionStatement) =>{
     axios
