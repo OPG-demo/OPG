@@ -56,7 +56,7 @@ const AddCoreCompForm = (props) =>{
         className='input'
         name="priority"
         ref={register}
-        type="integer"
+        type="number"
       />
       <label>Description</label>
       <input

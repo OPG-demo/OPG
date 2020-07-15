@@ -35,7 +35,6 @@ const EditSuccessFactorForm = (props) =>{
     axios
     .put(`http://localhost:8000/iksf/${props.location.successid}`, data)
     .then(res =>{
-      console.log(res)
       props.history.push('/stateofcompany')
     })
     .catch(err =>{
@@ -55,7 +54,7 @@ const EditSuccessFactorForm = (props) =>{
         className='input'
         name="priority"
         ref={register}
-        type="integer"
+        type="number"
         defaultValue={props.location.priority}
       />
       <label>Description</label>

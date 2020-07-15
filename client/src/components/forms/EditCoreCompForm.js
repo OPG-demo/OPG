@@ -36,7 +36,6 @@ const EditCoreCompForm = (props) =>{
     axios
     .put(`http://localhost:8000/corecomp/${props.location.ccid}`, data)
     .then(res =>{
-      console.log(res)
       props.history.push('/stateofcompany')
     })
     .catch(err =>{
@@ -56,7 +55,7 @@ const EditCoreCompForm = (props) =>{
         className='input'
         name="priority"
         ref={register}
-        type="integer"
+        type="number"
         defaultValue={props.location.priority}
       />
       <label>Description</label>
