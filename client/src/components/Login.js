@@ -1,13 +1,13 @@
-import React, {useState, useEffect} from 'react'
+import React from 'react'
 import axios from 'axios'
 import {useForm} from 'react-hook-form'
 
 const Login = (props) =>{
-  const [credentials, setCredentials] = useState({
-    username: "",
-    pwdhash: ""
-  })
-  const {register, handleSubmit, watch, errors} = useForm()
+  // const [credentials, setCredentials] = useState({
+  //   username: "",
+  //   pwdhash: ""
+  // })
+  const {register, handleSubmit, errors} = useForm()
 
   const onSubmit = (credentials) =>{
     axios

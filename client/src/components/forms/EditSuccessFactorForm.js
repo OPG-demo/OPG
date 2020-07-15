@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 import {useForm} from 'react-hook-form'
-import SuccessFactorTable from '../stateOfCompany/successFactorTable'
 
 const EditSuccessFactorForm = (props) =>{
   const [corecomp, setCorecomp] = useState([])

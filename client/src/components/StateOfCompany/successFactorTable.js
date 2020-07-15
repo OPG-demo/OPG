@@ -3,7 +3,6 @@ import {Table} from 'semantic-ui-react'
 import {Link} from 'react-router-dom'
 import '../../scss/StateOfCompany.scss'
 import axios from 'axios'
-import EditSuccessFactorForm from '../forms/EditSuccessFactorForm'
 
 
 const SuccessFactorTable = (props) =>{
@@ -12,7 +11,7 @@ const SuccessFactorTable = (props) =>{
   const [division, setDivision] = useState([])
   const loggedInUserOrg = parseInt(localStorage.getItem('org'))
 
-  const sortedSuccess = success.sort((a, b) => (a.priority > b.priority) ? 1 : -1)
+  success.sort((a, b) => (a.priority > b.priority) ? 1 : -1)
     
   useEffect(() =>{
     axios
@@ -23,7 +22,7 @@ const SuccessFactorTable = (props) =>{
       .catch(err =>{
         console.log(err)
       })
-  },[])
+  },[loggedInUserOrg])
 
   useEffect(() =>{
     axios

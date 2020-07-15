@@ -18,7 +18,6 @@ const ThreatTable = () =>{
   const [data, setData] = useState([])
   const [activeButton, setActiveButton] = useState('hide')
 
-  const loggedInUser = parseInt(localStorage.getItem('user'))
   const loggedInUserOrg = parseInt(localStorage.getItem('org'))
 
   useEffect(() =>{
@@ -26,13 +25,13 @@ const ThreatTable = () =>{
       .get(`http://localhost:8000/swot/org/${loggedInUserOrg}`)
       .then(res =>{
         setData(res.data.filter(function(type){
-          return type.type == 'threat'
+          return type.type === 'threat'
         }))
       })
       .catch(err =>{
         console.log(err)
       })
-  },[])
+  },[loggedInUserOrg])
 
 const onDragEnd = (result) => {
   if (!result.destination) {

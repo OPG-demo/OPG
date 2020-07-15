@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import {Icon, Label, Menu, Table} from 'semantic-ui-react'
+import {Table} from 'semantic-ui-react'
 import axios from 'axios'
 
 import '../../scss/StateOfCompany.scss'
@@ -7,7 +7,6 @@ import '../../scss/StateOfCompany.scss'
 const CoreCompetencyTable = (props) =>{
   const [corecomp, setCorecomp] = useState([])
 
-  const loggedInUser = parseInt(localStorage.getItem('user'))
   const loggedInUserOrg = parseInt(localStorage.getItem('org'))
 
   useEffect(() =>{
@@ -19,7 +18,7 @@ const CoreCompetencyTable = (props) =>{
       .catch(err =>{
         console.log(err)
       })
-  },[])
+  },[loggedInUserOrg])
 
   return(
     <div className='competency-container'>

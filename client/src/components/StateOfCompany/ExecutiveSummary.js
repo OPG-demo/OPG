@@ -1,10 +1,9 @@
-import React, {useState, useEffect, useContext} from 'react'
+import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 
 const ExecutiveSummary = () =>{
   const [summary, setSummary] = useState()
 
-  const loggedInUser = parseInt(localStorage.getItem('user'))
   const loggedInUserOrg = parseInt(localStorage.getItem('org'))
 
   useEffect(() =>{
@@ -16,7 +15,7 @@ const ExecutiveSummary = () =>{
       .catch(err =>{
         console.log(err)
       })
-  },[])
+  },[loggedInUserOrg])
 
   return(
     <div className='mission-container'>
