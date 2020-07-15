@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 import {useForm} from 'react-hook-form'
 
-const SuccessFactorForm = (props) =>{
+const AddSuccessFactorForm = (props) =>{
   const [corecomp, setCorecomp] = useState([])
   const [division, setDivision] = useState([])
   const {register, handleSubmit} = useForm()
@@ -42,6 +42,10 @@ const SuccessFactorForm = (props) =>{
     .catch(err =>{
       console.log(err)
     })
+  }
+
+  const handleCancel = () =>{
+    props.history.push('/stateofcompany')
   }
 
 
@@ -87,8 +91,9 @@ const SuccessFactorForm = (props) =>{
         defaultValue={loggedInUserOrg}
       />
       <input type='submit'/>
+      <button onClick={handleCancel}>Cancel</button>
     </form>
   )
 }
 
-export default SuccessFactorForm
+export default AddSuccessFactorForm
