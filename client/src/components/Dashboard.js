@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import '../scss/Dashboard.scss'
-import {Pie, Doughnut, Bar} from 'react-chartjs-2'
+import {Doughnut, Bar} from 'react-chartjs-2'
 import axios from 'axios'
 
 
@@ -13,7 +13,7 @@ const Dashboard = () =>{
   const loggedInUser = parseInt(localStorage.getItem('user'))
   const loggedInUserOrg = parseInt(localStorage.getItem('org'))
 
-  const today = new Date
+  const today = new Date()
 
   useEffect(() =>{
     axios
@@ -24,7 +24,7 @@ const Dashboard = () =>{
       .catch(err =>{
         console.log(err)
       })
-  },[])
+  },[loggedInUserOrg])
 
   useEffect(() =>{
     axios
@@ -46,7 +46,7 @@ const Dashboard = () =>{
       .catch(err =>{
         console.log(err)
       })
-  },[])
+  },[loggedInUserOrg])
 
   const completeObjectives = []
   const overdueObjectives = []

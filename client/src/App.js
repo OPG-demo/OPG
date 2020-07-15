@@ -25,7 +25,7 @@ function App() {
         <Route exact path='/swot' component={SituationAnalysis}/>
         <Route exact path='/objectives' component={Objectives}/>
         <Route exact path='/addmission' component={MissionStatementForm}/>
-        <Route exact path='addsuccess' component={SuccessFactorForm}/>
+        <Route exact path='/addsuccess' component={SuccessFactorForm}/>
       </div>
       {/* <Footer /> */}
     </div>

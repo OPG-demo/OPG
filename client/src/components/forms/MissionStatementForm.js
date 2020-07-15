@@ -3,11 +3,9 @@ import axios from 'axios'
 import {useForm} from 'react-hook-form'
 
 const MissionStatementForm = (props) =>{
-  const [missionStatement, setMissionStatement] = useState()
   const [initial, setInitial] = useState()
-  const {register, handleSubmit, watch, errors} = useForm()
+  const {register, handleSubmit} = useForm()
 
-  const loggedInUser = parseInt(localStorage.getItem('user'))
   const loggedInUserOrg = parseInt(localStorage.getItem('org'))
 
   useEffect(() =>{
@@ -19,7 +17,7 @@ const MissionStatementForm = (props) =>{
     .catch(err =>{
       console.log(err)
     })
-  },[])
+  },[loggedInUserOrg])
 
 
   const onSubmit = (missionStatement) =>{
