@@ -18,7 +18,6 @@ const StrengthTable = () =>{
   const [data, setData] = useState([])
   const [activeButton, setActiveButton] = useState('hide')
 
-  const loggedInUser = parseInt(localStorage.getItem('user'))
   const loggedInUserOrg = parseInt(localStorage.getItem('org'))
 
   useEffect(() =>{
@@ -26,15 +25,14 @@ const StrengthTable = () =>{
       .get(`http://localhost:8000/swot/org/${loggedInUserOrg}`)
       .then(res =>{
         setData(res.data.filter(function(type){
-          return type.type == 'strength'
+          return type.type === 'strength'
         }))
       })
       .catch(err =>{
         console.log(err)
       })
-  },[])
+  },[loggedInUserOrg])
 
-  console.log('button before drag', activeButton)
 
   const onDragEnd = (result) => {
     // dropped outside the list

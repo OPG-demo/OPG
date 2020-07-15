@@ -1,11 +1,10 @@
-import React, {useState, useEffect, useContext} from 'react'
+import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 import {Link} from 'react-router-dom'
 
 const MissionStatement = () =>{
   const [mission, setMission] = useState()
 
-  const loggedInUser = parseInt(localStorage.getItem('user'))
   const loggedInUserOrg = parseInt(localStorage.getItem('org'))
 
   useEffect(() =>{
@@ -17,7 +16,7 @@ const MissionStatement = () =>{
       .catch(err =>{
         console.log(err)
       })
-  },[])
+  },[loggedInUserOrg])
 
   const MissionRender = () =>{
     if(mission === null){

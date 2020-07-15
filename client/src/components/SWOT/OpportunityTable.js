@@ -17,7 +17,6 @@ const OpportunityTable = () =>{
   const [data, setData] = useState([])
   const [activeButton, setActiveButton] = useState('hide')
 
-  const loggedInUser = parseInt(localStorage.getItem('user'))
   const loggedInUserOrg = parseInt(localStorage.getItem('org'))
 
   useEffect(() =>{
@@ -25,13 +24,13 @@ const OpportunityTable = () =>{
       .get(`http://localhost:8000/swot/org/${loggedInUserOrg}`)
       .then(res =>{
         setData(res.data.filter(function(type){
-          return type.type == 'opportunity'
+          return type.type === 'opportunity'
         }))
       })
       .catch(err =>{
         console.log(err)
       })
-  },[])
+  },[loggedInUserOrg])
 
 const onDragEnd = (result) => {
   if (!result.destination) {

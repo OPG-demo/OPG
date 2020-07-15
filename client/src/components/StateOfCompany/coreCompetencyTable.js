@@ -1,14 +1,18 @@
 import React, {useState, useEffect} from 'react'
-import {Icon, Label, Menu, Table} from 'semantic-ui-react'
+import {Table} from 'semantic-ui-react'
 import axios from 'axios'
+import {Link} from 'react-router-dom'
 
 import '../../scss/StateOfCompany.scss'
 
 const CoreCompetencyTable = (props) =>{
   const [corecomp, setCorecomp] = useState([])
+  const [division, setDivision] = useState([])
 
-  const loggedInUser = parseInt(localStorage.getItem('user'))
   const loggedInUserOrg = parseInt(localStorage.getItem('org'))
+
+  corecomp.sort((a, b) => (a.priority > b.priority) ? 1 : -1)
+
 
   useEffect(() =>{
     axios
@@ -19,7 +23,18 @@ const CoreCompetencyTable = (props) =>{
       .catch(err =>{
         console.log(err)
       })
-  },[])
+  },[loggedInUserOrg])
+
+  useEffect(() =>{
+    axios
+    .get(`http://localhost:8000/division/org/${loggedInUserOrg}`)
+    .then(res =>{
+      setDivision(res.data)
+    })
+    .catch(err =>{
+      console.log(err)
+    })
+  },[loggedInUserOrg])
 
   return(
     <div className='competency-container'>
@@ -38,13 +53,23 @@ const CoreCompetencyTable = (props) =>{
           <Table.Row key={item.id}>
             <Table.Cell className='cell'>{item.priority}</Table.Cell>
             <Table.Cell className='cell'>{item.description}</Table.Cell>
-            <Table.Cell className='cell'>{item.div_id}</Table.Cell>
+            {division.map((x, div) =>{
+              if(x.id === item.div_id){
+                return <Table.Cell key={x.id} className='cell'>{x.name}</Table.Cell>
+              }
+            })}
             <Table.Cell className='cell'>{item.iksf}</Table.Cell>
             <Table.Cell className='cell'>{item.scope}</Table.Cell>
+            <Link to={{pathname:'/editcorecomp', ccid: item.id, priority: item.priority, desc: item.description, division: item.div_id, scope: item.scope}}>
+              <i className="fas fa-pen"></i>
+            </Link>
           </Table.Row>
           )}
         </Table.Body>
       </Table>
+      <Link to='/addcorecomp'>
+            <i className="fas fa-plus"></i>
+      </Link>
     </div>
   )
 }

@@ -1,17 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {Route} from 'react-router-dom'
 
 import Dashboard from './components/Dashboard'
 import './scss/index.scss';
 
 import Header from './components/Header'
-import Footer from './components/Footer';
+// import Footer from './components/Footer';
 import StateOfCompany from './components/stateOfCompany/StateOfCompany';
 import SituationAnalysis from './components/SWOT/SituationAnalysis';
 import Objectives from './components/Objectives'
 import Login from './components/Login'
 import MissionStatementForm from './components/forms/MissionStatementForm';
-import SuccessFactorForm from './components/forms/SuccessFactorForm'
+import AddSuccessFactorForm from './components/forms/AddSuccessFactorForm'
+import EditSuccessFactorForm from './components/forms/EditSuccessFactorForm'
+import AddCoreCompForm from './components/forms/AddCoreCompForm'
+import EditCoreCompForm from './components/forms/EditCoreCompForm'
 
 
 function App() {
@@ -25,7 +28,10 @@ function App() {
         <Route exact path='/swot' component={SituationAnalysis}/>
         <Route exact path='/objectives' component={Objectives}/>
         <Route exact path='/addmission' component={MissionStatementForm}/>
-        <Route exact path='/addsuccess' component={SuccessFactorForm}/>
+        <Route exact path='/addsuccess' component={AddSuccessFactorForm}/>
+        <Route exact path='/editsuccess' component={EditSuccessFactorForm}/>
+        <Route exact path='/addcorecomp' component={AddCoreCompForm}/>
+        <Route exact path='/editcorecomp' component={EditCoreCompForm}/>
       </div>
       {/* <Footer /> */}
     </div>

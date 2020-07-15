@@ -7,7 +7,11 @@ import axios from 'axios'
 
 const SuccessFactorTable = (props) =>{
   const [success, setSuccess] = useState([])
+  const [corecomp, setCorecomp] = useState([])
+  const [division, setDivision] = useState([])
   const loggedInUserOrg = parseInt(localStorage.getItem('org'))
+
+  success.sort((a, b) => (a.priority > b.priority) ? 1 : -1)
     
   useEffect(() =>{
     axios
@@ -18,7 +22,30 @@ const SuccessFactorTable = (props) =>{
       .catch(err =>{
         console.log(err)
       })
-  },[])
+  },[loggedInUserOrg])
+
+  useEffect(() =>{
+    axios
+    .get(`http://localhost:8000/corecomp/org/${loggedInUserOrg}`)
+    .then(res =>{
+      setCorecomp(res.data)
+    })
+    .catch(err =>{
+      console.log(err)
+    })
+  },[loggedInUserOrg])
+
+  useEffect(() =>{
+    axios
+    .get(`http://localhost:8000/division/org/${loggedInUserOrg}`)
+    .then(res =>{
+      setDivision(res.data)
+    })
+    .catch(err =>{
+      console.log(err)
+    })
+  },[loggedInUserOrg])
+
 
   return(
     <div className='success-container'>
@@ -33,11 +60,22 @@ const SuccessFactorTable = (props) =>{
         </Table.Header>
         <Table.Body>
           {success.map((item) =>
-          <Table.Row key={item.id}>
+          <Table.Row key={item.id} successid={item.id}>
             <Table.Cell className='cell'>{item.priority}</Table.Cell>
             <Table.Cell className='cell'>{item.description}</Table.Cell>
-            <Table.Cell className='cell'>{item.div_id}</Table.Cell>
-            <Table.Cell className='cell'>{item.corecomp}</Table.Cell>
+            {division.map((x, div) =>{
+              if(x.id === item.div_id){
+                return <Table.Cell key={x.id} className='cell'>{x.name}</Table.Cell>
+              }
+            })}
+            {corecomp.map((x, div) =>{
+              if(x.id === item.corecomp){
+                return <Table.Cell key={x.id}className='cell'>{x.description}</Table.Cell>
+              }
+            })}
+            <Link to={{pathname:'/editsuccess', successid: item.id, priority: item.priority, desc: item.description, division: item.div_id, corecomp: item.corecomp}}>
+              <i className="fas fa-pen"></i>
+            </Link>
           </Table.Row>
           )}
         </Table.Body>

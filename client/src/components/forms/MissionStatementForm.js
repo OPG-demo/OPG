@@ -31,6 +31,9 @@ const MissionStatementForm = (props) =>{
     })
   }
 
+  const handleCancel = () =>{
+    props.history.push('/stateofcompany')
+  }
 
   return(
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -41,6 +44,7 @@ const MissionStatementForm = (props) =>{
         ref={register}
       />
       <input type='submit'/>
+      <button onClick={handleCancel}>Cancel</button>
     </form>
   )
 }
