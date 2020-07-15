@@ -2,8 +2,8 @@ import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 import {useForm} from 'react-hook-form'
 
-const EditSuccessFactorForm = (props) =>{
-  const [corecomp, setCorecomp] = useState([])
+const EditCoreCompForm = (props) =>{
+  const [iksf, setIksf] = useState([])
   const [division, setDivision] = useState([])
   const {register, handleSubmit} = useForm()
 
@@ -11,9 +11,9 @@ const EditSuccessFactorForm = (props) =>{
 
   useEffect(() =>{
     axios
-    .get(`http://localhost:8000/corecomp/org/${loggedInUserOrg}`)
+    .get(`http://localhost:8000/iksf/org/${loggedInUserOrg}`)
     .then(res =>{
-      setCorecomp(res.data)
+      setIksf(res.data)
     })
     .catch(err =>{
       console.log(err)
@@ -31,9 +31,10 @@ const EditSuccessFactorForm = (props) =>{
     })
   },[loggedInUserOrg])
 
+
   const onSubmit = (data) =>{
     axios
-    .put(`http://localhost:8000/iksf/${props.location.successid}`, data)
+    .put(`http://localhost:8000/corecomp/${props.location.ccid}`, data)
     .then(res =>{
       console.log(res)
       props.history.push('/stateofcompany')
@@ -76,16 +77,15 @@ const EditSuccessFactorForm = (props) =>{
           return <option ref={register} key={x.id} value={x.id}>{x.name}</option>
         })}
       </select>
-      <label>CoreComp</label>
+      <label>Scope</label>
       <select
         className='input'
-        name="corecomp"
+        name="scope"
         ref={register}
-        defaultValue={props.location.corecomp}
+        defaultValue={props.location.scope}
       >
-        {corecomp.map((x, div) =>{
-          return <option ref={register} key={x.id} value={x.id}>{x.description}</option>
-        })}
+        <option value="present">present</option>
+        <option value="future">future</option>
       </select>
       <input
         className='hidethis'
@@ -99,4 +99,4 @@ const EditSuccessFactorForm = (props) =>{
   )
 }
 
-export default EditSuccessFactorForm
+export default EditCoreCompForm
