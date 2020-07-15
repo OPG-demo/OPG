@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {Route} from 'react-router-dom'
 
 import Dashboard from './components/Dashboard'
@@ -10,6 +10,9 @@ import StateOfCompany from './components/stateOfCompany/StateOfCompany';
 import SituationAnalysis from './components/SWOT/SituationAnalysis';
 import Objectives from './components/Objectives'
 import Login from './components/Login'
+import MissionStatementForm from './components/forms/MissionStatementForm';
+import SuccessFactorForm from './components/forms/SuccessFactorForm'
+
 
 function App() {
   return (
@@ -21,6 +24,8 @@ function App() {
         <Route exact path='/stateofcompany' component={StateOfCompany}/>
         <Route exact path='/swot' component={SituationAnalysis}/>
         <Route exact path='/objectives' component={Objectives}/>
+        <Route exact path='/addmission' component={MissionStatementForm}/>
+        <Route exact path='/addsuccess' component={SuccessFactorForm}/>
       </div>
       {/* <Footer /> */}
     </div>

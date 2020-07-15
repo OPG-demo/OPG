@@ -1,61 +1,51 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
-import {Link} from 'react-router-dom'
+import {useForm} from 'react-hook-form'
 
-const Login = props =>{
+const Login = (props) =>{
   const [credentials, setCredentials] = useState({
     username: "",
     pwdhash: ""
   })
+  const {register, handleSubmit, watch, errors} = useForm()
 
-  const headers = {
-    "Content-Type": "application/json"
-  }
-
-  const handleSubmit = e =>{
-    e.preventDefault()
+  const onSubmit = (credentials) =>{
     axios
-      .post(
-        "http://localhost:8000/login",
-        credentials,
-        headers
-      )
-      .then(res =>{
-        localStorage.setItem('user', res.data.id)
-        localStorage.setItem('org', res.data.org)
-        console.log(res.data.id)
-        localStorage.setItem("authorization", res.data.key)
-        props.history.push('/dashboards')
-      })
-      .catch(err =>{
-        console.log(err.response)
-        setCredentials({
-          username: "",
-          pwdhash: ""
-        })
-      })
+    .post(
+      "http://localhost:8000/login",
+      credentials
+    )
+    .then(res =>{
+      localStorage.setItem('user', res.data.id)
+      localStorage.setItem('org', res.data.org)
+      localStorage.setItem("authorization", res.data.key)
+      props.history.push('/dashboards')
+    })
+    .catch(err =>{
+      console.log(err.response)
+    })
   }
 
-  const handleChange = e =>{
-    setCredentials({...credentials, [e.target.name]: e.target.value})
-  }
 
   return(
     <div className='login-container'>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <input
-          type="text"
+          className="input"
           name="username"
           placeholder="Username"
-          onChange={handleChange}
+          ref={register({required: true})}
         />
+        {errors.username && <p>Username is required</p>}
         <input
+          className="input"
           type="password"
           name="pwdhash"
           placeholder="Password"
-          onChange={handleChange}
+          ref={register({required: true})}
         />
-        <button type="submit">Login</button>
+        {errors.pwdhash && <p>Password is required</p>}
+        <input type="submit" className='login-button'/>
       </form>
     </div>
   )

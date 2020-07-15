@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React from 'react'
 import StrengthTable from './StrengthTable'
 import WeaknessCard from './WeaknessTable'
 import OpportunityCard from './OpportunityTable'

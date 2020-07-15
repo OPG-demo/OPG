@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import '../scss/Dashboard.scss'
-import {Pie, Doughnut, Bar} from 'react-chartjs-2'
+import {Doughnut, Bar} from 'react-chartjs-2'
 import axios from 'axios'
 
 
@@ -13,18 +13,18 @@ const Dashboard = () =>{
   const loggedInUser = parseInt(localStorage.getItem('user'))
   const loggedInUserOrg = parseInt(localStorage.getItem('org'))
 
-  const today = new Date
+  const today = new Date()
 
   useEffect(() =>{
     axios
-      .get(`http://localhost:8000/objective`)
+      .get(`http://localhost:8000/objective/org/${loggedInUserOrg}`)
       .then(res =>{
         setObjective(res.data)
       })
       .catch(err =>{
         console.log(err)
       })
-  },[])
+  },[loggedInUserOrg])
 
   useEffect(() =>{
     axios
@@ -39,14 +39,14 @@ const Dashboard = () =>{
 
   useEffect(() =>{
     axios
-      .get(`http://localhost:8000/division`)
+      .get(`http://localhost:8000/division/org/${loggedInUserOrg}`)
       .then(res =>{
         setDivision(res.data)
       })
       .catch(err =>{
         console.log(err)
       })
-  },[])
+  },[loggedInUserOrg])
 
   const completeObjectives = []
   const overdueObjectives = []
@@ -160,8 +160,8 @@ const Dashboard = () =>{
       data: [completeCommittee.length, overdueCommittee.length, pendingCommittee.length, incompleteCommittee.length],
       backgroundColor: [
       '#011638',
-      '#607466',
-      '#435058',
+      '#a30e03',
+      '#145c02',
       '#deeb34'
       ]
     }]
@@ -194,7 +194,6 @@ const Dashboard = () =>{
 
 
   objective.map((x, index) =>{
-    if(x.org_id === loggedInUserOrg){
       division.map((i, index) =>{
         if(x.div_id === i.id){
           if(i.name === 'operations'){
@@ -250,7 +249,6 @@ const Dashboard = () =>{
           }
         }
       })
-    }
   })
 
 
@@ -271,12 +269,12 @@ const Dashboard = () =>{
       },
       {
         label: ["Overdue"],
-        backgroundColor: '#607466',
+        backgroundColor: '#a30e03',
         data: dataPack2,
       },
       {
         label: ["Pending"],
-        backgroundColor: '#435058',
+        backgroundColor: '#228708',
         data: dataPack3,
       },
       {
@@ -377,6 +375,12 @@ const Dashboard = () =>{
               options={committeeObjectiveOptions}
               />
           </div>
+        </div>
+        <div className='chart-keys'> 
+          <p className='chart-key-complete'>Complete</p>
+          <p className='chart-key-overdue'>Overdue</p>
+          <p className='chart-key-pending'>Pending</p>
+          <p className='chart-key-incomplete'>Incomplete</p>
         </div>
       </div>
       <div className='company-dashboard'>

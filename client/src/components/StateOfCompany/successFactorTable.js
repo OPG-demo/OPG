@@ -1,19 +1,19 @@
 import React, {useState, useEffect} from 'react'
-import {Icon, Label, Menu, Table} from 'semantic-ui-react'
-
+import {Table} from 'semantic-ui-react'
+import {Link} from 'react-router-dom'
 import '../../scss/StateOfCompany.scss'
 import axios from 'axios'
 
 
 const SuccessFactorTable = (props) =>{
   const [success, setSuccess] = useState([])
+  const loggedInUserOrg = parseInt(localStorage.getItem('org'))
     
   useEffect(() =>{
     axios
-      .get(`http://localhost:8000/iksf`)
+      .get(`http://localhost:8000/iksf/org/${loggedInUserOrg}`)
       .then(res =>{
         setSuccess(res.data)
-        console.log('success',res.data)
       })
       .catch(err =>{
         console.log(err)
@@ -42,6 +42,9 @@ const SuccessFactorTable = (props) =>{
           )}
         </Table.Body>
       </Table>
+      <Link to='/addsuccess'>
+            <i className="fas fa-plus"></i>
+      </Link>
     </div>
   )
 }

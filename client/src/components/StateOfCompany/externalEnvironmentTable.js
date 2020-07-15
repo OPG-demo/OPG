@@ -1,19 +1,17 @@
 import React, {useState, useEffect} from 'react'
-import {Card} from 'semantic-ui-react'
 import axios from 'axios'
 
 import '../../scss/StateOfCompany.scss'
-
-
-const tableData = ['stuff', 'things', 'stuff', 'things', 'stuff', 'things',]
   
 
 const ExternalEnvironmentTable = () =>{
   const [externalReview, setExternalReview] = useState()
 
+  const loggedInUserOrg = parseInt(localStorage.getItem('org'))
+
   useEffect(() =>{
     axios
-      .get(`http://localhost:8000/org/1`)
+      .get(`http://localhost:8000/org/${loggedInUserOrg}`)
       .then(res =>{
         setExternalReview(res.data.eereview)
       })
