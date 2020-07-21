@@ -76,6 +76,17 @@ const EditCoreCompForm = (props) =>{
           return <option ref={register} key={x.id} value={x.id}>{x.name}</option>
         })}
       </select>
+      <label>IKSF</label>
+      <select
+        className='input'
+        name="iksf_id"
+        ref={register}
+        defaultValue={props.location.iksf}
+      >
+        {iksf.map((x, div) =>{
+          return <option ref={register} key={x.id} value={x.id}>{x.description}</option>
+        })}
+      </select>
       <label>Scope</label>
       <select
         className='input'

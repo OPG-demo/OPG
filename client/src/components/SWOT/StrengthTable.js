@@ -20,6 +20,7 @@ const StrengthTable = () =>{
 
   const loggedInUserOrg = parseInt(localStorage.getItem('org'))
 
+
   useEffect(() =>{
     axios
       .get(`http://localhost:8000/swot/org/${loggedInUserOrg}`)
@@ -59,6 +60,7 @@ const StrengthTable = () =>{
       .then(res =>{
         console.log('inside the .then')
         window.location.reload()
+        data.sort((a, b) => (a.priority > b.priority) ? 1 : -1)
         // setData(res.data)
       })
       .catch(err =>{

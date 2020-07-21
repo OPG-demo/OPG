@@ -55,6 +55,7 @@ const handleSubmit = () =>{
       console.log('put req',res)
       window.location.reload()
       // setData(res.data)
+      data.sort((a, b) => (a.priority > b.priority) ? 1 : -1)
     })
     .catch(err =>{
       console.log(err)
