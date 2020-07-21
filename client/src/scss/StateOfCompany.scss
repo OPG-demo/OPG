@@ -68,7 +68,7 @@
     }
     .success-container{
       align-self: center;
-      width: 90%;
+      // width: 90%;
 
       .table{
         padding: 0 1rem 0 1rem;
@@ -94,7 +94,7 @@
     }
     .competency-container{
       align-self: center;
-      width: 90%;
+      // width: 90%;
 
       .table{
         padding: 0 1rem 0 1rem;
@@ -117,25 +117,6 @@
       border-bottom: 2px solid $color4;
       text-align: right;
     }
-
-    .environments-container{
-      display: flex;
-      justify-content: center;
-      width: 50%;
-      margin: auto;
-
-      .card{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin: 1rem;
-
-        .header{
-          font-size: 1rem;
-          font-weight: bold;
-        }
-      }
-    }
   }
   .organizationChart{
     margin: 2rem;
@@ -144,7 +125,7 @@
     }
 
     .organization-container{
-      width: 90%;
+      // width: 90%;
       margin: auto;
     }
   }

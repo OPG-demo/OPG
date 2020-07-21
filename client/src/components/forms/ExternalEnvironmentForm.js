@@ -2,19 +2,19 @@ import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 import {Editor} from '@tinymce/tinymce-react'
 
-const MissionStatementForm = (props) =>{
-  const [mission, setMission] = useState()
+const ExternalEnvironmentForm = (props) =>{
+  const [eereview, setEereview] = useState()
 
   const loggedInUserOrg = parseInt(localStorage.getItem('org'))
 
   const handleChange = (e) =>{
     let change = e.target.getContent()
-    setMission(change)
+    setEereview(change)
   }
 
   const handleSubmit = () =>{
     axios
-    .put(`http://localhost:8000/org/${loggedInUserOrg}`, {mission})
+    .put(`http://localhost:8000/org/${loggedInUserOrg}`, {eereview})
     .then(res =>{
     })
     .catch(err =>{
@@ -26,9 +26,9 @@ const MissionStatementForm = (props) =>{
     <form onSubmit={handleSubmit}>
       <Editor 
         onChange={handleChange} 
-        name="mission" 
+        name="eereview" 
         apiKey="8agp2jq696z66uug592pmst899o8m7ea94eziv30fce48pyp" 
-        value={mission} 
+        value={eereview} 
         initialValue={props.initial}
         init={{
           forced_root_block : '',
@@ -41,4 +41,4 @@ const MissionStatementForm = (props) =>{
   )
 }
 
-export default MissionStatementForm
+export default ExternalEnvironmentForm

@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
+import ExecutiveSummaryForm from '../forms/ExecutiveSummaryForm'
 
 const ExecutiveSummary = () =>{
   const [summary, setSummary] = useState()
@@ -19,7 +20,7 @@ const ExecutiveSummary = () =>{
 
   return(
     <div className='mission-container'>
-      <p>{summary}</p>
+      <ExecutiveSummaryForm initial={summary}/>
     </div>
   )
 }
