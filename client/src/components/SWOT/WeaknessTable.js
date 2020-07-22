@@ -97,6 +97,7 @@ const WeaknessTable = () =>{
             ref={provided.innerRef}
           >
             {data.map((item, index) => (
+              <div>
               <Draggable key={item.id.toString()} draggableId={item.id.toString()} index={index}>
                 {(provided) => (
                   <div
@@ -112,10 +113,14 @@ const WeaknessTable = () =>{
                       return <p key={x.id}>{x.name}</p>
                       }
                     })}
+                    <Link to={{pathname:'/editswot', swotid: item.id, priority: item.priority, element: item.element, division: item.division, swottype: item.type}}>
+                      <i className="fas fa-pen"></i>
+                    </Link>
                   </div>
                 </div>
                 )}
               </Draggable>
+              </div>
             ))}
             {provided.placeholder}
           </div>

@@ -21,6 +21,9 @@ const StrengthTable = () =>{
   const [division, setDivision] = useState([])
   const loggedInUserOrg = parseInt(localStorage.getItem('org'))
 
+  // useEffect(() =>{
+  //   data.sort((a, b) => (a.priority > b.priority) ? 1 : -1)
+  // })
 
   useEffect(() =>{
     axios
@@ -112,6 +115,9 @@ const StrengthTable = () =>{
                       return <p key={x.id}>{x.name}</p>
                       }
                     })}
+                    <Link to={{pathname:'/editswot', swotid: item.id, priority: item.priority, element: item.element, division: item.division, swottype: item.type}}>
+                      <i className="fas fa-pen"></i>
+                    </Link>
                   </div>
                 </div>
                 )}
