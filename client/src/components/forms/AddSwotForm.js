@@ -77,6 +77,7 @@ const AddSwotForm = (props) =>{
         className="input"
         name="type"
         ref={register}
+        defaultValue={props.location.swottype}
       >
         <option ref={register} value="strength">Strength</option>
         <option ref={register} value="weakness">Weakness</option>

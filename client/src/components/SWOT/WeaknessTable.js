@@ -122,7 +122,7 @@ const WeaknessTable = () =>{
         )}
       </Droppable>
     </DragDropContext>
-    <Link to='/addswot'>
+    <Link to={{pathname: '/addswot', swottype: 'weakness'}}>
       <i className="fas fa-plus"></i>
     </Link>
     </div>

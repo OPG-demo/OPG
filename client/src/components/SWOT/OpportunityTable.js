@@ -122,7 +122,7 @@ const OpportunityTable = () =>{
         )}
       </Droppable>
     </DragDropContext>
-    <Link to='/addswot'>
+    <Link to={{pathname: '/addswot', swottype: 'opportunity'}}>
       <i className="fas fa-plus"></i>
     </Link>
     </div>

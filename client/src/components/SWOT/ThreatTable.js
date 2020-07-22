@@ -122,7 +122,7 @@ const ThreatTable = () =>{
         )}
       </Droppable>
     </DragDropContext>
-    <Link to='/addswot'>
+    <Link to={{pathname: '/addswot', swottype: 'threat'}}>
       <i className="fas fa-plus"></i>
     </Link>
     </div>
