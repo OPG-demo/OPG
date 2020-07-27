@@ -21,9 +21,9 @@ const StrengthTable = () =>{
   const [division, setDivision] = useState([])
   const loggedInUserOrg = parseInt(localStorage.getItem('org'))
 
-  // useEffect(() =>{
-  //   data.sort((a, b) => (a.priority > b.priority) ? 1 : -1)
-  // })
+  useEffect(() =>{
+    data.sort((a, b) => (a.priority > b.priority) ? 1 : -1)
+  },[])
 
   useEffect(() =>{
     axios
@@ -74,7 +74,6 @@ const StrengthTable = () =>{
       .then(res =>{
         console.log('inside the .then')
         window.location.reload()
-        data.sort((a, b) => (a.priority > b.priority) ? 1 : -1)
         // setData(res.data)
       })
       .catch(err =>{
@@ -83,7 +82,7 @@ const StrengthTable = () =>{
     }
     console.log('outside the for loop')
   }
-  // window.location.reload()
+  // window.location.onload(data.sort((a, b) => (a.priority > b.priority) ? 1 : -1))
 
   
 

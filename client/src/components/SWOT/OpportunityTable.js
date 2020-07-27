@@ -21,6 +21,9 @@ const OpportunityTable = () =>{
   const [division, setDivision] = useState([])
   const loggedInUserOrg = parseInt(localStorage.getItem('org'))
 
+  useEffect(() =>{
+    data.sort((a, b) => (a.priority > b.priority) ? 1 : -1)
+  },[])
 
   useEffect(() =>{
     axios
@@ -71,7 +74,6 @@ const OpportunityTable = () =>{
       .then(res =>{
         console.log('inside the .then')
         window.location.reload()
-        data.sort((a, b) => (a.priority > b.priority) ? 1 : -1)
         // setData(res.data)
       })
       .catch(err =>{

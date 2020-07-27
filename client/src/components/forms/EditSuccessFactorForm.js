@@ -69,7 +69,6 @@ const EditSuccessFactorForm = (props) =>{
         className='input'
         name="div_id"
         ref={register}
-        defaultValue={props.location.division}
       >
         {division.map((x, div) =>{
           return <option ref={register} key={x.id} value={x.id}>{x.name}</option>

@@ -21,6 +21,9 @@ const WeaknessTable = () =>{
   const [division, setDivision] = useState([])
   const loggedInUserOrg = parseInt(localStorage.getItem('org'))
 
+  useEffect(() =>{
+    data.sort((a, b) => (a.priority > b.priority) ? 1 : -1)
+  },[])
 
   useEffect(() =>{
     axios
@@ -71,7 +74,6 @@ const WeaknessTable = () =>{
       .then(res =>{
         console.log('inside the .then')
         window.location.reload()
-        data.sort((a, b) => (a.priority > b.priority) ? 1 : -1)
         // setData(res.data)
       })
       .catch(err =>{
@@ -97,7 +99,6 @@ const WeaknessTable = () =>{
             ref={provided.innerRef}
           >
             {data.map((item, index) => (
-              <div>
               <Draggable key={item.id.toString()} draggableId={item.id.toString()} index={index}>
                 {(provided) => (
                   <div
@@ -120,7 +121,6 @@ const WeaknessTable = () =>{
                 </div>
                 )}
               </Draggable>
-              </div>
             ))}
             {provided.placeholder}
           </div>
