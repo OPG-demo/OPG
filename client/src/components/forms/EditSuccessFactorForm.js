@@ -70,7 +70,11 @@ const EditSuccessFactorForm = (props) =>{
         name="div_id"
         ref={register}
       >
+        {/* <option key={x.id} value={props.location.division}>{x.name}</option> */}
         {division.map((x, div) =>{
+          if(x.id === props.location.division){
+            return <option ref={register} key={x.id} value={x.id} selected>{x.name}</option>
+          }
           return <option ref={register} key={x.id} value={x.id}>{x.name}</option>
         })}
       </select>
@@ -79,9 +83,11 @@ const EditSuccessFactorForm = (props) =>{
         className='input'
         name="corecomp"
         ref={register}
-        defaultValue={props.location.corecomp}
       >
         {corecomp.map((x, div) =>{
+          if(x.id === props.location.corecomp){
+            return <option ref={register} key={x.id} value={x.id} selected>{x.description}</option>
+          }
           return <option ref={register} key={x.id} value={x.id}>{x.description}</option>
         })}
       </select>
