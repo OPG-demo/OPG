@@ -59,9 +59,11 @@ const EditSwotForm = (props) =>{
         className='input'
         name="division"
         ref={register}
-        defaultValue={props.location.division}
       >
         {division.map((x, div) =>{
+          if(x.id === props.location.division){
+            return <option ref={register} key={x.id} value={x.id} selected>{x.name}</option>
+          }
           return <option ref={register} key={x.id} value={x.id}>{x.name}</option>
         })}
       </select>
