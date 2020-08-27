@@ -27,6 +27,7 @@ const Objectives = () =>{
       .get(`http://localhost:8000/objective/org/${loggedInUserOrg}`)
       .then(res =>{
         setData(res.data)
+        console.log(res.data)
       })
       .catch(err =>{
         console.log(err)
@@ -138,7 +139,6 @@ return(
                           return(<p key={x.id}>{x.name}</p>)
                         }
                       })}
-                      {/* {GetDivName(item.div_id)} */}
                       <p>{item.due_date}</p>
                       <p>{item.updated_date}</p>
                       <p>{item.completed_date}</p>

@@ -17,6 +17,7 @@ import AddCoreCompForm from './components/forms/AddCoreCompForm'
 import EditCoreCompForm from './components/forms/EditCoreCompForm'
 import AddSwotForm from './components/forms/AddSwotForm'
 import EditSwotForm from './components/forms/EditSwotForm'
+import AddObjectiveForm from './components/forms/AddObjectiveForm'
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
         <Route exact path='/editcorecomp' component={EditCoreCompForm}/>
         <Route exact path='/addswot' component={AddSwotForm}/>
         <Route exact path='/editswot' component={EditSwotForm}/>
+        <Route exact path='/addobjective' component={AddObjectiveForm}/>
       </div>
       {/* <Footer /> */}
     </div>
