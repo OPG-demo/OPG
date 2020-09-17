@@ -1,13 +1,14 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
-import {useForm} from 'react-hook-form'
+import {useForm, Controller} from 'react-hook-form'
+import ReactDatepicker from 'react-datepicker'
 
 const AddObjectiveForm = (props) =>{
   const [objective, setObjective] = useState([])
   const [user, setUser] = useState([])
   const [division, setDivision] = useState([])
   const [swot, setSwot] = useState([])
-  const {register, handleSubmit} = useForm()
+  const {register, handleSubmit, control} = useForm()
 
   const loggedInUserOrg = parseInt(localStorage.getItem('org'))
 
@@ -54,6 +55,7 @@ const AddObjectiveForm = (props) =>{
       console.log(err)
     })
   },[loggedInUserOrg])
+
 
   const onSubmit = (objective) =>{
     axios
@@ -109,26 +111,59 @@ const AddObjectiveForm = (props) =>{
         })}
       </select>
       <label>Due Date</label>
-      <input
-        className='input'
+      <Controller
+        control={control}
         name="due_date"
-        ref={register}
-        type="date"
-      />
+        // ref={register}
+        render={(props) =>(
+          <ReactDatepicker
+          className="input"
+          placeholderText="Select date"
+          onChange={(e) => props.onChange(e)}
+          selected={props.value}
+          />
+        )}
+        />
       <label>Updated Date</label>
-      <input
+      <Controller
+        control={control}
+        name="updated_date"
+        // ref={register}
+        render={(props) =>(
+          <ReactDatepicker
+          className="input"
+          placeholderText="Select date"
+          onChange={(e) => props.onChange(e)}
+          selected={props.value}
+          />
+        )}
+        />
+      {/* <input
         className='input'
         name="updated_date"
         ref={register}
         type="date"
-      />
+      /> */}
       <label>Completed Date</label>
-      <input
+      <Controller
+        control={control}
+        name="completed_date"
+        // ref={register}
+        render={(props) =>(
+          <ReactDatepicker
+          className="input"
+          placeholderText="Select date"
+          onChange={(e) => props.onChange(e)}
+          selected={props.value}
+          />
+        )}
+        />
+      {/* <input
         className='input'
         name="completed_date"
         ref={register}
         type="date"
-      />
+      /> */}
       <label>Primary SWOT</label>
       <select
         className='input'
