@@ -3,7 +3,7 @@ import axios from 'axios'
 import {useForm, Controller} from 'react-hook-form'
 import ReactDatepicker from 'react-datepicker'
 
-const AddObjectiveForm = (props) =>{
+const EditObjectiveForm = (props) =>{
   const [objective, setObjective] = useState([])
   const [user, setUser] = useState([])
   const [division, setDivision] = useState([])
@@ -59,7 +59,7 @@ const AddObjectiveForm = (props) =>{
 
   const onSubmit = (objective) =>{
     axios
-    .post(`http://localhost:8000/objective`, objective)
+    .put(`http://localhost:8000/objective/${props.location.objectiveid}`, objective)
     .then(res =>{
       console.log(res)
       props.history.push('/objectives')
@@ -70,7 +70,7 @@ const AddObjectiveForm = (props) =>{
   }
 
   const handleCancel = () =>{
-    props.history.push('/swot')
+    props.history.push('/objectives')
   }
 
 
@@ -82,12 +82,14 @@ const AddObjectiveForm = (props) =>{
         name="priority"
         ref={register}
         type="number"
+        defaultValue={props.location.priority}
       />
       <label>Description</label>
       <input
         className='input'
         name="description"
         ref={register}
+        defaultValue={props.location.desc}
       />
       <label>Responsible</label>
       <select
@@ -96,6 +98,9 @@ const AddObjectiveForm = (props) =>{
         ref={register}
       >
         {user.map((x, div) =>{
+          if(x.id === props.location.responsible){
+            return <option ref={register} key={x.id} value={x.id} selected>{x.fullname}</option>
+          }
           return <option ref={register} key={x.id} value={x.id}>{x.fullname}</option>
         })}
       </select>
@@ -106,10 +111,13 @@ const AddObjectiveForm = (props) =>{
         ref={register}
       >
         {division.map((x, div) =>{
+          if(x.id === props.location.division){
+            return <option ref={register} key={x.id} value={x.id} selected>{x.name}</option> 
+          }
           return <option ref={register} key={x.id} value={x.id}>{x.name}</option>
         })}
       </select>
-      <label>Due Date</label>
+      {/* <label>Due Date</label>
       <Controller
         control={control}
         name="due_date"
@@ -117,12 +125,12 @@ const AddObjectiveForm = (props) =>{
         render={(props) =>(
           <ReactDatepicker
           className="input"
-          placeholderText="Select date"
+          placeholderText={}
           onChange={(e) => props.onChange(e)}
           selected={props.value}
           />
         )}
-        />
+        /> */}
       <label>Updated Date</label>
       <Controller
         control={control}
@@ -160,6 +168,9 @@ const AddObjectiveForm = (props) =>{
         ref={register}
       >
         {swot.map((x, div) =>{
+          if(x.id === props.location.swot){
+            return <option ref={register} key={x.id} value={x.id} selected>{x.element}</option>
+          }
           return <option ref={register} key={x.id} value={x.id}>{x.element}</option>
         })}
       </select>
@@ -176,4 +187,4 @@ const AddObjectiveForm = (props) =>{
   )
 }
 
-export default AddObjectiveForm
+export default EditObjectiveForm

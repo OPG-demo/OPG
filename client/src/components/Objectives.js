@@ -3,6 +3,8 @@ import {Accordion, AccordionItem, AccordionItemHeading, AccordionItemButton, Acc
 import {DragDropContext, Droppable, Draggable} from 'react-beautiful-dnd'
 import '../scss/Objectives.scss'
 import axios from 'axios'
+import {Link} from 'react-router-dom'
+
 
 const reorder = (list, startIndex, endIndex) => {
   const result = Array.from(list);
@@ -148,7 +150,9 @@ return(
                         }
                       })}
 
-
+                    <Link to={{pathname:'/editobjective', objectiveid: item.id, priority: item.priority, desc: item.description, division: item.div_id, responsible: item.responsible, swot: item.swot_ref}}>
+                      <i className="fas fa-pen"></i>
+                    </Link>
 
                       </div>
                     </AccordionItemButton>
