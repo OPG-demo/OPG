@@ -172,15 +172,16 @@ return(
                       {tactic.map((x, index) =>{
                         if(x.obj_id === item.id){
                           return(
-                            <>
-                              <div key={x.id} className="tactics">
-                                {/* <p>{index + 1}</p> */}
-                                <p>{x.description}</p>
-                                <p>{x.due_date}</p>
-                                <p>{x.updated_date}</p>
-                                <p>{x.completed_date}</p>
-                              </div>
-                            </>
+                            <div key={x.id} className="tactics">
+                              {/* <p>{index + 1}</p> */}
+                              <p>{x.description}</p>
+                              <p>{x.due_date}</p>
+                              <p>{x.updated_date}</p>
+                              <p>{x.completed_date}</p>
+                              <Link to={{pathname:'/edittactic', id: x.id, description: x.description, obj_id: item.id}}>
+                                <i className="fas fa-pen"></i>
+                              </Link>
+                            </div>
                           )
                         }
                       })}
