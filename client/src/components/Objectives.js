@@ -165,21 +165,27 @@ return(
                           return(<p key={x.id}>{x.element}</p>)
                         }
                       })}
+                      <h3>Tactics</h3>
+                      <Link to={{pathname: '/addtactic', obj_id: item.id}}>
+                        <i className="fas fa-plus"></i>
+                      </Link>
                       {tactic.map((x, index) =>{
                         if(x.obj_id === item.id){
                           return(
-                            <div key={x.id} className="tactics">
-                              <p>{index + 1}</p>
-                              <p>{x.description}</p>
-                              <p>{x.due_date}</p>
-                              <p>{x.updated_date}</p>
-                              <p>{x.completed_date}</p>
-                            </div>
+                            <>
+                              <div key={x.id} className="tactics">
+                                {/* <p>{index + 1}</p> */}
+                                <p>{x.description}</p>
+                                <p>{x.due_date}</p>
+                                <p>{x.updated_date}</p>
+                                <p>{x.completed_date}</p>
+                              </div>
+                            </>
                           )
                         }
                       })}
 
-
+                        <h3>Committee</h3>
                         {item.committee.map((x, index) =>{
                           return(<div key={index}>
                             {user.map((k, index) =>{
@@ -189,6 +195,7 @@ return(
                             })}
                           </div>)
                         })}
+                        <h3>Core Competencies</h3>
                         {item.corecomp.map((x, index) =>{
                           return(<div key={index}>
                             {corecomp.map((k, index) =>{

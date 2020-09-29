@@ -19,6 +19,7 @@ import AddSwotForm from './components/forms/AddSwotForm'
 import EditSwotForm from './components/forms/EditSwotForm'
 import AddObjectiveForm from './components/forms/AddObjectiveForm'
 import EditObjectiveForm from './components/forms/EditObjectiveForm'
+import AddTacticForm from './components/forms/AddTacticForm';
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
         <Route exact path='/editswot' component={EditSwotForm}/>
         <Route exact path='/addobjective' component={AddObjectiveForm}/>
         <Route exact path='/editobjective' component={EditObjectiveForm}/>
+        <Route exact path='/addtactic' component={AddTacticForm}/>
       </div>
       {/* <Footer /> */}
     </div>
