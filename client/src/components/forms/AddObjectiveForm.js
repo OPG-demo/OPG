@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 import {useForm, Controller} from 'react-hook-form'
 import ReactDatepicker from 'react-datepicker'
+import { useParams } from 'react-router-dom'
 
 const AddObjectiveForm = (props) =>{
   const [objective, setObjective] = useState([])
@@ -163,6 +164,14 @@ const AddObjectiveForm = (props) =>{
           return <option ref={register} key={x.id} value={x.id}>{x.element}</option>
         })}
       </select>
+
+      <fieldset>
+        <legend>Committee</legend>
+        {user.map((x, div) =>{
+          return <label key={x.id}><input type="checkbox" ref={register} name="committee" value={x.id}/>{x.fullname}</label>
+        })}
+      </fieldset>
+
       <input
         className='hidethis'
         name='org_id'

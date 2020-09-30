@@ -99,7 +99,7 @@ const EditObjectiveForm = (props) =>{
       >
         {user.map((x, div) =>{
           if(x.id === props.location.responsible){
-            return <option ref={register} key={x.id} value={x.id} selected>{x.fullname}</option>
+            return <option ref={register} key={x.id} value={x.id} defaultValue>{x.fullname}</option>
           }
           return <option ref={register} key={x.id} value={x.id}>{x.fullname}</option>
         })}
@@ -112,7 +112,7 @@ const EditObjectiveForm = (props) =>{
       >
         {division.map((x, div) =>{
           if(x.id === props.location.division){
-            return <option ref={register} key={x.id} value={x.id} selected>{x.name}</option> 
+            return <option ref={register} key={x.id} value={x.id} defaultValue>{x.name}</option> 
           }
           return <option ref={register} key={x.id} value={x.id}>{x.name}</option>
         })}
@@ -169,11 +169,22 @@ const EditObjectiveForm = (props) =>{
       >
         {swot.map((x, div) =>{
           if(x.id === props.location.swot){
-            return <option ref={register} key={x.id} value={x.id} selected>{x.element}</option>
+            return <option ref={register} key={x.id} value={x.id} defaultValue>{x.element}</option>
           }
           return <option ref={register} key={x.id} value={x.id}>{x.element}</option>
         })}
       </select>
+
+      <fieldset>
+        <legend>Committee</legend>
+        {user.map((x, div) =>{
+          if(props.location.committee.includes(x.id)){
+            return <label key={x.id}><input type="checkbox" defaultChecked ref={register} name="committee" value={x.id}/>{x.fullname}</label>
+          }
+          return <label key={x.id}><input type="checkbox" ref={register} name="committee" value={x.id}/>{x.fullname}</label>
+        })}
+      </fieldset>
+
       <input
         className='hidethis'
         name='org_id'
