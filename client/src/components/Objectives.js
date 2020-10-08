@@ -3,6 +3,8 @@ import {Accordion, AccordionItem, AccordionItemHeading, AccordionItemButton, Acc
 import {DragDropContext, Droppable, Draggable} from 'react-beautiful-dnd'
 import '../scss/Objectives.scss'
 import axios from 'axios'
+import {Link} from 'react-router-dom'
+
 
 const reorder = (list, startIndex, endIndex) => {
   const result = Array.from(list);
@@ -27,6 +29,7 @@ const Objectives = () =>{
       .get(`http://localhost:8000/objective/org/${loggedInUserOrg}`)
       .then(res =>{
         setData(res.data)
+        console.log(res.data)
       })
       .catch(err =>{
         console.log(err)
@@ -138,7 +141,6 @@ return(
                           return(<p key={x.id}>{x.name}</p>)
                         }
                       })}
-                      {/* {GetDivName(item.div_id)} */}
                       <p>{item.due_date}</p>
                       <p>{item.updated_date}</p>
                       <p>{item.completed_date}</p>
@@ -148,7 +150,9 @@ return(
                         }
                       })}
 
-
+                    <Link to={{pathname:'/editobjective', objectiveid: item.id, priority: item.priority, desc: item.description, division: item.div_id, responsible: item.responsible, swot: item.swot_ref, committee: item.committee}}>
+                      <i className="fas fa-pen"></i>
+                    </Link>
 
                       </div>
                     </AccordionItemButton>
@@ -161,21 +165,28 @@ return(
                           return(<p key={x.id}>{x.element}</p>)
                         }
                       })}
+                      <h3>Tactics</h3>
+                      <Link to={{pathname: '/addtactic', obj_id: item.id}}>
+                        <i className="fas fa-plus"></i>
+                      </Link>
                       {tactic.map((x, index) =>{
                         if(x.obj_id === item.id){
                           return(
                             <div key={x.id} className="tactics">
-                              <p>{index + 1}</p>
+                              {/* <p>{index + 1}</p> */}
                               <p>{x.description}</p>
                               <p>{x.due_date}</p>
                               <p>{x.updated_date}</p>
                               <p>{x.completed_date}</p>
+                              <Link to={{pathname:'/edittactic', id: x.id, description: x.description, obj_id: item.id}}>
+                                <i className="fas fa-pen"></i>
+                              </Link>
                             </div>
                           )
                         }
                       })}
 
-
+                        <h3>Committee</h3>
                         {item.committee.map((x, index) =>{
                           return(<div key={index}>
                             {user.map((k, index) =>{
@@ -185,6 +196,7 @@ return(
                             })}
                           </div>)
                         })}
+                        <h3>Core Competencies</h3>
                         {item.corecomp.map((x, index) =>{
                           return(<div key={index}>
                             {corecomp.map((k, index) =>{

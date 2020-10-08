@@ -1,24 +1,13 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 import {useForm} from 'react-hook-form'
+import SituationAnalysis from '../SWOT/SituationAnalysis'
 
-const EditSuccessFactorForm = (props) =>{
-  const [corecomp, setCorecomp] = useState([])
+const EditSwotForm = (props) =>{
   const [division, setDivision] = useState([])
   const {register, handleSubmit} = useForm()
 
   const loggedInUserOrg = parseInt(localStorage.getItem('org'))
-
-  useEffect(() =>{
-    axios
-    .get(`http://localhost:8000/corecomp/org/${loggedInUserOrg}`)
-    .then(res =>{
-      setCorecomp(res.data)
-    })
-    .catch(err =>{
-      console.log(err)
-    })
-  },[loggedInUserOrg])
 
   useEffect(() =>{
     axios
@@ -31,11 +20,12 @@ const EditSuccessFactorForm = (props) =>{
     })
   },[loggedInUserOrg])
 
-  const onSubmit = (data) =>{
+  const onSubmit = (swot) =>{
     axios
-    .put(`http://localhost:8000/iksf/${props.location.successid}`, data)
+    .put(`http://localhost:8000/swot/${props.location.swotid}`, swot)
     .then(res =>{
-      props.history.push('/stateofcompany')
+      console.log(res)
+      props.history.push('/swot')
     })
     .catch(err =>{
       console.log(err)
@@ -43,34 +33,33 @@ const EditSuccessFactorForm = (props) =>{
   }
 
   const handleCancel = () =>{
-    props.history.push('/stateofcompany')
+    props.history.push('/swot')
   }
 
 
   return(
     <form onSubmit={handleSubmit(onSubmit)}>
-      <label>Priority</label>
+      {/* <label>Priority</label>
       <input
         className='input'
         name="priority"
         ref={register}
         type="number"
         defaultValue={props.location.priority}
-      />
-      <label>Description</label>
+      /> */}
+      <label>Title</label>
       <input
         className='input'
-        name="description"
+        name="element"
         ref={register}
-        defaultValue={props.location.desc}
+        defaultValue={props.location.element}
       />
       <label>Division</label>
       <select
         className='input'
-        name="div_id"
+        name="division"
         ref={register}
       >
-        {/* <option key={x.id} value={props.location.division}>{x.name}</option> */}
         {division.map((x, div) =>{
           if(x.id === props.location.division){
             return <option ref={register} key={x.id} value={x.id} selected>{x.name}</option>
@@ -78,18 +67,16 @@ const EditSuccessFactorForm = (props) =>{
           return <option ref={register} key={x.id} value={x.id}>{x.name}</option>
         })}
       </select>
-      <label>CoreComp</label>
       <select
-        className='input'
-        name="corecomp"
+        className="input"
+        name="type"
         ref={register}
+        defaultValue={props.location.swottype}
       >
-        {corecomp.map((x, div) =>{
-          if(x.id === props.location.corecomp){
-            return <option ref={register} key={x.id} value={x.id} selected>{x.description}</option>
-          }
-          return <option ref={register} key={x.id} value={x.id}>{x.description}</option>
-        })}
+        <option ref={register} value="strength">Strength</option>
+        <option ref={register} value="weakness">Weakness</option>
+        <option ref={register} value="opportunity">Opportunity</option>
+        <option ref={register} value="threat">Threat</option>
       </select>
       <input
         className='hidethis'
@@ -103,4 +90,4 @@ const EditSuccessFactorForm = (props) =>{
   )
 }
 
-export default EditSuccessFactorForm
+export default EditSwotForm

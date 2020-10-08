@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import {Link} from 'react-router-dom'
 import '../../scss/SituationAnalysis.scss'
 import axios from 'axios'
 
@@ -17,8 +18,12 @@ const StrengthTable = () =>{
 
   const [data, setData] = useState([])
   const [activeButton, setActiveButton] = useState('hide')
-
+  const [division, setDivision] = useState([])
   const loggedInUserOrg = parseInt(localStorage.getItem('org'))
+
+  useEffect(() =>{
+    data.sort((a, b) => (a.priority > b.priority) ? 1 : -1)
+  },[])
 
   useEffect(() =>{
     axios
@@ -33,6 +38,16 @@ const StrengthTable = () =>{
       })
   },[loggedInUserOrg])
 
+  useEffect(() =>{
+    axios
+    .get(`http://localhost:8000/division/org/${loggedInUserOrg}`)
+    .then(res =>{
+      setDivision(res.data)
+    })
+    .catch(err =>{
+      console.log(err)
+    })
+  },[loggedInUserOrg])
 
   const onDragEnd = (result) => {
     // dropped outside the list
@@ -67,7 +82,7 @@ const StrengthTable = () =>{
     }
     console.log('outside the for loop')
   }
-  // window.location.reload()
+  // window.location.onload(data.sort((a, b) => (a.priority > b.priority) ? 1 : -1))
 
   
 
@@ -91,8 +106,19 @@ const StrengthTable = () =>{
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
                   >
-                  <div className='list-item'> <p>{item.priority}</p> <p>{item.element}</p><p>{item.division}</p></div>
+                  <div className='list-item'>
+                     <p>{item.priority}</p> 
+                     <p>{item.element}</p>
+                     {division.map((x, div) =>{
+                      if(x.id === item.division){
+                      return <p key={x.id}>{x.name}</p>
+                      }
+                    })}
+                    <Link to={{pathname:'/editswot', swotid: item.id, priority: item.priority, element: item.element, division: item.division, swottype: item.type}}>
+                      <i className="fas fa-pen"></i>
+                    </Link>
                   </div>
+                </div>
                 )}
               </Draggable>
             ))}
@@ -101,6 +127,9 @@ const StrengthTable = () =>{
         )}
       </Droppable>
     </DragDropContext>
+    <Link to={{pathname: '/addswot', swottype: 'strength'}}>
+      <i className="fas fa-plus"></i>
+    </Link>
     </div>
   )
 }

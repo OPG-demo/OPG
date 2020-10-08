@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 import {Link} from 'react-router-dom'
+import MissionStatementForm from '../forms/MissionStatementForm'
 
 const MissionStatement = () =>{
   const [mission, setMission] = useState()
@@ -18,25 +19,10 @@ const MissionStatement = () =>{
       })
   },[loggedInUserOrg])
 
-  const MissionRender = () =>{
-    if(mission === null){
-      return(<div>
-        <p>Add a mission statment</p>
-        <Link to='/addmission'>
-        <i className="fas fa-plus"></i></Link></div>)
-    } else {
-      return(<div>
-        <p>{mission}</p>
-        <Link to='/addmission'>
-        <i className="fas fa-pen"></i></Link>
-      </div>)
-    }
-  }
-
 
   return(
     <div className='mission-container'>
-      <MissionRender/>
+      <MissionStatementForm initial={mission}/>
     </div>
   )
 }

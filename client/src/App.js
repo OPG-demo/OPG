@@ -15,7 +15,12 @@ import AddSuccessFactorForm from './components/forms/AddSuccessFactorForm'
 import EditSuccessFactorForm from './components/forms/EditSuccessFactorForm'
 import AddCoreCompForm from './components/forms/AddCoreCompForm'
 import EditCoreCompForm from './components/forms/EditCoreCompForm'
-
+import AddSwotForm from './components/forms/AddSwotForm'
+import EditSwotForm from './components/forms/EditSwotForm'
+import AddObjectiveForm from './components/forms/AddObjectiveForm'
+import EditObjectiveForm from './components/forms/EditObjectiveForm'
+import AddTacticForm from './components/forms/AddTacticForm';
+import EditTacticForm from './components/forms/EditTacticForm'
 
 function App() {
   return (
@@ -32,6 +37,13 @@ function App() {
         <Route exact path='/editsuccess' component={EditSuccessFactorForm}/>
         <Route exact path='/addcorecomp' component={AddCoreCompForm}/>
         <Route exact path='/editcorecomp' component={EditCoreCompForm}/>
+        <Route exact path='/addswot' component={AddSwotForm}/>
+        <Route exact path='/editswot' component={EditSwotForm}/>
+        <Route exact path='/addobjective' component={AddObjectiveForm}/>
+        <Route exact path='/editobjective' component={EditObjectiveForm}/>
+        <Route exact path='/addtactic' component={AddTacticForm}/>
+        <Route exact path='/edittactic' component={EditTacticForm}/>
+
       </div>
       {/* <Footer /> */}
     </div>

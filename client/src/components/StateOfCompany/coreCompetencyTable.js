@@ -8,6 +8,7 @@ import '../../scss/StateOfCompany.scss'
 const CoreCompetencyTable = (props) =>{
   const [corecomp, setCorecomp] = useState([])
   const [division, setDivision] = useState([])
+  const [iksf, setIksf] = useState([])
 
   const loggedInUserOrg = parseInt(localStorage.getItem('org'))
 
@@ -36,6 +37,17 @@ const CoreCompetencyTable = (props) =>{
     })
   },[loggedInUserOrg])
 
+  useEffect(() =>{
+    axios
+    .get(`http://localhost:8000/iksf/org/${loggedInUserOrg}`)
+    .then(res =>{
+      setIksf(res.data)
+    })
+    .catch(err =>{
+      console.log(err)
+    })
+  },[loggedInUserOrg])
+
   return(
     <div className='competency-container'>
       <Table className='table'>
@@ -58,9 +70,13 @@ const CoreCompetencyTable = (props) =>{
                 return <Table.Cell key={x.id} className='cell'>{x.name}</Table.Cell>
               }
             })}
-            <Table.Cell className='cell'>{item.iksf}</Table.Cell>
+            {iksf.map((x, iksf) =>{
+              if(x.id === item.iksf_id){
+                return <Table.Cell key={x.id} className='cell'>{x.description}</Table.Cell>
+              }
+            })}
             <Table.Cell className='cell'>{item.scope}</Table.Cell>
-            <Link to={{pathname:'/editcorecomp', ccid: item.id, priority: item.priority, desc: item.description, division: item.div_id, scope: item.scope}}>
+            <Link to={{pathname:'/editcorecomp', ccid: item.id, priority: item.priority, desc: item.description, division: item.div_id, iksf: item.iksf_id, scope: item.scope}}>
               <i className="fas fa-pen"></i>
             </Link>
           </Table.Row>

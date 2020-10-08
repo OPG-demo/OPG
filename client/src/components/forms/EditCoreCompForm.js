@@ -73,7 +73,24 @@ const EditCoreCompForm = (props) =>{
         defaultValue={props.location.division}
       >
         {division.map((x, div) =>{
+          if(x.id === props.location.division){
+            return <option ref={register} key={x.id} value={x.id} selected>{x.name}</option>
+          }
           return <option ref={register} key={x.id} value={x.id}>{x.name}</option>
+        })}
+      </select>
+      <label>IKSF</label>
+      <select
+        className='input'
+        name="iksf_id"
+        ref={register}
+        defaultValue={props.location.iksf}
+      >
+        {iksf.map((x, div) =>{
+          if(x.id === props.location.iksf){
+            return <option ref={register} key={x.id} value={x.id} selected>{x.description}</option>
+          }
+          return <option ref={register} key={x.id} value={x.id}>{x.description}</option>
         })}
       </select>
       <label>Scope</label>

@@ -1,7 +1,9 @@
 import React, {useState, useEffect} from 'react'
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import {Link} from 'react-router-dom'
 import '../../scss/SituationAnalysis.scss'
 import axios from 'axios'
+
 
 
 const reorder = (list, startIndex, endIndex) => {
@@ -16,8 +18,12 @@ const OpportunityTable = () =>{
 
   const [data, setData] = useState([])
   const [activeButton, setActiveButton] = useState('hide')
-
+  const [division, setDivision] = useState([])
   const loggedInUserOrg = parseInt(localStorage.getItem('org'))
+
+  useEffect(() =>{
+    data.sort((a, b) => (a.priority > b.priority) ? 1 : -1)
+  },[])
 
   useEffect(() =>{
     axios
@@ -32,35 +38,54 @@ const OpportunityTable = () =>{
       })
   },[loggedInUserOrg])
 
-const onDragEnd = (result) => {
-  if (!result.destination) {
-  return;
-}
-
-const items = reorder(
-  data,
-  result.source.index,
-  result.destination.index
-);
-
-setData(items)
-setActiveButton('show')
-}
-
-const handleSubmit = () =>{
-  for(let i = 0; i < data.length; i++){
+  useEffect(() =>{
     axios
-    .put(`http://localhost:8000/swot/${data[i].id}`, {priority: i + 1})
+    .get(`http://localhost:8000/division/org/${loggedInUserOrg}`)
     .then(res =>{
-      console.log('put req',res)
-      window.location.reload()
-      // setData(res.data)
+      setDivision(res.data)
     })
     .catch(err =>{
       console.log(err)
     })
+  },[loggedInUserOrg])
+
+  const onDragEnd = (result) => {
+    // dropped outside the list
+    if (!result.destination) {
+      return;
+    }
+
+    const items = reorder(
+      data,
+      result.source.index,
+      result.destination.index
+    );
+    console.log(items)
+    setData(items)
+    setActiveButton('show')
+    console.log('button after drag', activeButton)
   }
-}
+
+  const handleSubmit = () =>{
+    for(let i = 0; i < data.length; i++){
+      console.log('inside for loop, before axios call', i)
+      axios
+      .put(`http://localhost:8000/swot/${data[i].id}`, {priority: i + 1})
+      .then(res =>{
+        console.log('inside the .then')
+        window.location.reload()
+        // setData(res.data)
+      })
+      .catch(err =>{
+        console.log(err)
+      })
+    }
+    console.log('outside the for loop')
+  }
+  // window.location.reload()
+
+  
+
 
   return(
     <div className='dnd-container'>
@@ -81,8 +106,19 @@ const handleSubmit = () =>{
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
                   >
-                  <div className='list-item'> <p>priority {item.priority}</p> <p>{item.element}</p><p>{item.division}</p></div>
+                  <div className='list-item'>
+                     <p>{item.priority}</p> 
+                     <p>{item.element}</p>
+                     {division.map((x, div) =>{
+                      if(x.id === item.division){
+                      return <p key={x.id}>{x.name}</p>
+                      }
+                    })}
+                    <Link to={{pathname:'/editswot', swotid: item.id, priority: item.priority, element: item.element, division: item.division, swottype: item.type}}>
+                      <i className="fas fa-pen"></i>
+                    </Link>
                   </div>
+                </div>
                 )}
               </Draggable>
             ))}
@@ -91,6 +127,9 @@ const handleSubmit = () =>{
         )}
       </Droppable>
     </DragDropContext>
+    <Link to={{pathname: '/addswot', swottype: 'opportunity'}}>
+      <i className="fas fa-plus"></i>
+    </Link>
     </div>
   )
 }

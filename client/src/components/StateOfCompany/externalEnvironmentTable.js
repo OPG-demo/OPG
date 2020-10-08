@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
-
+import ExternalEnvironmentForm from '../forms/ExternalEnvironmentForm'
 import '../../scss/StateOfCompany.scss'
   
 
@@ -22,7 +22,7 @@ const ExternalEnvironmentTable = () =>{
 
   return(
     <div className='environments-container'>
-      <p>{externalReview}</p>
+      <ExternalEnvironmentForm initial={externalReview}/>
     </div>
   )
 }
